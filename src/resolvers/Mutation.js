@@ -68,10 +68,25 @@ const sendingCode = async (parent,args,context,info)=>{
     
     return generated
     }
+
+    // to reset the password
+const resetPassword = async (parent,args,context,info)=>{
+    const newPassword = await bcrypt.hash(args.newPassword,10)
+    const user = await context.prisma.updateUser({
+        data:{
+            password: newPassword
+        },
+        where:{
+            id:args.id
+        }
+    }) 
+    return user
+    }
 module.exports={
     signUp,
     signIn,
     deleteUser,
     updateUser,
-    sendingCode
+    sendingCode,
+    resetPassword
 }
