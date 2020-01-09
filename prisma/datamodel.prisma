@@ -22,6 +22,7 @@ type Cow{
     herd: Herd!
     images: [String!]! @scalarList(strategy: RELATION)
     device: String @unique
+    status: Boolean!
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }
@@ -31,6 +32,7 @@ type Herd{
     image: String,
     location:String,
     cows: [Cow!]!
+    status: Boolean!
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

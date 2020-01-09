@@ -27,6 +27,7 @@ type Cow {
   herd: Herd!
   images: [String!]!
   device: String
+  status: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -49,6 +50,7 @@ input CowCreateInput {
   herd: HerdCreateOneWithoutCowsInput!
   images: CowCreateimagesInput
   device: String
+  status: Boolean!
 }
 
 input CowCreateManyWithoutHerdInput {
@@ -63,6 +65,7 @@ input CowCreateWithoutHerdInput {
   heal: Int!
   images: CowCreateimagesInput
   device: String
+  status: Boolean!
 }
 
 type CowEdge {
@@ -81,6 +84,8 @@ enum CowOrderByInput {
   heal_DESC
   device_ASC
   device_DESC
+  status_ASC
+  status_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -94,6 +99,7 @@ type CowPreviousValues {
   heal: Int!
   images: [String!]!
   device: String
+  status: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -151,6 +157,8 @@ input CowScalarWhereInput {
   device_not_starts_with: String
   device_ends_with: String
   device_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -201,6 +209,7 @@ input CowUpdateInput {
   herd: HerdUpdateOneRequiredWithoutCowsInput
   images: CowUpdateimagesInput
   device: String
+  status: Boolean
 }
 
 input CowUpdateManyDataInput {
@@ -209,6 +218,7 @@ input CowUpdateManyDataInput {
   heal: Int
   images: CowUpdateimagesInput
   device: String
+  status: Boolean
 }
 
 input CowUpdateManyMutationInput {
@@ -217,6 +227,7 @@ input CowUpdateManyMutationInput {
   heal: Int
   images: CowUpdateimagesInput
   device: String
+  status: Boolean
 }
 
 input CowUpdateManyWithoutHerdInput {
@@ -242,6 +253,7 @@ input CowUpdateWithoutHerdDataInput {
   heal: Int
   images: CowUpdateimagesInput
   device: String
+  status: Boolean
 }
 
 input CowUpdateWithWhereUniqueWithoutHerdInput {
@@ -309,6 +321,8 @@ input CowWhereInput {
   device_not_starts_with: String
   device_ends_with: String
   device_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -343,6 +357,7 @@ type Herd {
   image: String
   location: String
   cows(where: CowWhereInput, orderBy: CowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cow!]
+  status: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -359,6 +374,7 @@ input HerdCreateInput {
   image: String
   location: String
   cows: CowCreateManyWithoutHerdInput
+  status: Boolean!
 }
 
 input HerdCreateOneWithoutCowsInput {
@@ -371,6 +387,7 @@ input HerdCreateWithoutCowsInput {
   herdsman: UserCreateOneInput!
   image: String
   location: String
+  status: Boolean!
 }
 
 type HerdEdge {
@@ -385,6 +402,8 @@ enum HerdOrderByInput {
   image_DESC
   location_ASC
   location_DESC
+  status_ASC
+  status_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -395,6 +414,7 @@ type HerdPreviousValues {
   id: ID!
   image: String
   location: String
+  status: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -422,11 +442,13 @@ input HerdUpdateInput {
   image: String
   location: String
   cows: CowUpdateManyWithoutHerdInput
+  status: Boolean
 }
 
 input HerdUpdateManyMutationInput {
   image: String
   location: String
+  status: Boolean
 }
 
 input HerdUpdateOneRequiredWithoutCowsInput {
@@ -440,6 +462,7 @@ input HerdUpdateWithoutCowsDataInput {
   herdsman: UserUpdateOneRequiredInput
   image: String
   location: String
+  status: Boolean
 }
 
 input HerdUpsertWithoutCowsInput {
@@ -494,6 +517,8 @@ input HerdWhereInput {
   cows_every: CowWhereInput
   cows_some: CowWhereInput
   cows_none: CowWhereInput
+  status: Boolean
+  status_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

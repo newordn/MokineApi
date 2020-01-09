@@ -4,6 +4,7 @@ scalar Upload
 type Query{
     info:String!
     users:[User!]!
+    herds:[Herd]!
 }
 type Mutation{
     resetPassword(newPassword:String!,id:ID!):User!
@@ -40,6 +41,7 @@ type Cow{
     herd: Herd!
     images: [String!]!
     device: String
+    status: Boolean!
 }
 type Herd{
     id:ID!
@@ -47,6 +49,7 @@ type Herd{
     image: String,
     location:String,
     cows: [Cow!]!
+    status: Boolean!
 }
 `
 

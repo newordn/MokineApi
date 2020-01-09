@@ -190,6 +190,8 @@ export type CowOrderByInput =
   | "heal_DESC"
   | "device_ASC"
   | "device_DESC"
+  | "status_ASC"
+  | "status_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -202,6 +204,8 @@ export type HerdOrderByInput =
   | "image_DESC"
   | "location_ASC"
   | "location_DESC"
+  | "status_ASC"
+  | "status_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -246,6 +250,7 @@ export interface CowUpdateInput {
   herd?: Maybe<HerdUpdateOneRequiredWithoutCowsInput>;
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export type CowWhereUniqueInput = AtLeastOne<{
@@ -279,6 +284,7 @@ export interface CowUpdateManyMutationInput {
   heal?: Maybe<Int>;
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export interface HerdUpdateInput {
@@ -286,6 +292,7 @@ export interface HerdUpdateInput {
   image?: Maybe<String>;
   location?: Maybe<String>;
   cows?: Maybe<CowUpdateManyWithoutHerdInput>;
+  status?: Maybe<Boolean>;
 }
 
 export interface UserUpdateOneRequiredInput {
@@ -302,6 +309,7 @@ export interface CowCreateWithoutHerdInput {
   heal: Int;
   images?: Maybe<CowCreateimagesInput>;
   device?: Maybe<String>;
+  status: Boolean;
 }
 
 export interface HerdSubscriptionWhereInput {
@@ -362,6 +370,8 @@ export interface HerdWhereInput {
   cows_every?: Maybe<CowWhereInput>;
   cows_some?: Maybe<CowWhereInput>;
   cows_none?: Maybe<CowWhereInput>;
+  status?: Maybe<Boolean>;
+  status_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -402,6 +412,7 @@ export interface CowCreateInput {
   herd: HerdCreateOneWithoutCowsInput;
   images?: Maybe<CowCreateimagesInput>;
   device?: Maybe<String>;
+  status: Boolean;
 }
 
 export interface UserUpdateInput {
@@ -429,6 +440,7 @@ export interface CowUpdateManyDataInput {
   heal?: Maybe<Int>;
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export interface HerdCreateWithoutCowsInput {
@@ -436,6 +448,7 @@ export interface HerdCreateWithoutCowsInput {
   herdsman: UserCreateOneInput;
   image?: Maybe<String>;
   location?: Maybe<String>;
+  status: Boolean;
 }
 
 export interface CowUpdateManyWithWhereNestedInput {
@@ -683,12 +696,14 @@ export interface HerdUpdateOneRequiredWithoutCowsInput {
 export interface HerdUpdateManyMutationInput {
   image?: Maybe<String>;
   location?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export interface HerdUpdateWithoutCowsDataInput {
   herdsman?: Maybe<UserUpdateOneRequiredInput>;
   image?: Maybe<String>;
   location?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export interface CowScalarWhereInput {
@@ -744,6 +759,8 @@ export interface CowScalarWhereInput {
   device_not_starts_with?: Maybe<String>;
   device_ends_with?: Maybe<String>;
   device_not_ends_with?: Maybe<String>;
+  status?: Maybe<Boolean>;
+  status_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -771,6 +788,7 @@ export interface HerdCreateInput {
   image?: Maybe<String>;
   location?: Maybe<String>;
   cows?: Maybe<CowCreateManyWithoutHerdInput>;
+  status: Boolean;
 }
 
 export interface CowUpdateWithWhereUniqueWithoutHerdInput {
@@ -860,6 +878,8 @@ export interface CowWhereInput {
   device_not_starts_with?: Maybe<String>;
   device_ends_with?: Maybe<String>;
   device_not_ends_with?: Maybe<String>;
+  status?: Maybe<Boolean>;
+  status_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -887,6 +907,7 @@ export interface CowUpdateWithoutHerdDataInput {
   heal?: Maybe<Int>;
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export type HerdWhereUniqueInput = AtLeastOne<{
@@ -987,6 +1008,7 @@ export interface Herd {
   id: ID_Output;
   image?: String;
   location?: String;
+  status: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1005,6 +1027,7 @@ export interface HerdPromise extends Promise<Herd>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1025,6 +1048,7 @@ export interface HerdSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  status: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1045,6 +1069,7 @@ export interface HerdNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1250,6 +1275,7 @@ export interface CowPreviousValues {
   heal: Int;
   images: String[];
   device?: String;
+  status: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1263,6 +1289,7 @@ export interface CowPreviousValuesPromise
   heal: () => Promise<Int>;
   images: () => Promise<String[]>;
   device: () => Promise<String>;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1276,6 +1303,7 @@ export interface CowPreviousValuesSubscription
   heal: () => Promise<AsyncIterator<Int>>;
   images: () => Promise<AsyncIterator<String[]>>;
   device: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1345,6 +1373,7 @@ export interface Cow {
   heal: Int;
   images: String[];
   device?: String;
+  status: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1357,6 +1386,7 @@ export interface CowPromise extends Promise<Cow>, Fragmentable {
   herd: <T = HerdPromise>() => T;
   images: () => Promise<String[]>;
   device: () => Promise<String>;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1371,6 +1401,7 @@ export interface CowSubscription
   herd: <T = HerdSubscription>() => T;
   images: () => Promise<AsyncIterator<String[]>>;
   device: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1383,6 +1414,7 @@ export interface CowNullablePromise extends Promise<Cow | null>, Fragmentable {
   herd: <T = HerdPromise>() => T;
   images: () => Promise<String[]>;
   device: () => Promise<String>;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1429,6 +1461,7 @@ export interface HerdPreviousValues {
   id: ID_Output;
   image?: String;
   location?: String;
+  status: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1439,6 +1472,7 @@ export interface HerdPreviousValuesPromise
   id: () => Promise<ID_Output>;
   image: () => Promise<String>;
   location: () => Promise<String>;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1449,6 +1483,7 @@ export interface HerdPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   image: () => Promise<AsyncIterator<String>>;
   location: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }

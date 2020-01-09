@@ -4,7 +4,13 @@ const users = async (parent,args,context,info)=>{
         status:true}})
     return users
 }
+const herds = async (parent,args,context,info)=>{
+    const herds = await context.prisma.herds({orderBy: 'id_DESC',where:{
+        status:true}})
+    return herds
+}
 module.exports={
     info,
-    users
+    users,
+    herds
 }
