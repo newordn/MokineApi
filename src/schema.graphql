@@ -5,6 +5,7 @@ type Query{
     info:String!
     users:[User!]!
     herds:[Herd]!
+    cowsByHerd(herdId:ID!): [Cow!]!
 }
 type Mutation{
     resetPassword(newPassword:String!,id:ID!):User!
