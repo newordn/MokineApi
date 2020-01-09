@@ -228,6 +228,8 @@ export type UserOrderByInput =
   | "others_DESC"
   | "password_ASC"
   | "password_DESC"
+  | "status_ASC"
+  | "status_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -300,7 +302,18 @@ export interface CowCreateWithoutHerdInput {
   device?: Maybe<String>;
 }
 
-export interface CowWhereInput {
+export interface HerdSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<HerdWhereInput>;
+  AND?: Maybe<HerdSubscriptionWhereInput[] | HerdSubscriptionWhereInput>;
+  OR?: Maybe<HerdSubscriptionWhereInput[] | HerdSubscriptionWhereInput>;
+  NOT?: Maybe<HerdSubscriptionWhereInput[] | HerdSubscriptionWhereInput>;
+}
+
+export interface HerdWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -315,45 +328,38 @@ export interface CowWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  height?: Maybe<Float>;
-  height_not?: Maybe<Float>;
-  height_in?: Maybe<Float[] | Float>;
-  height_not_in?: Maybe<Float[] | Float>;
-  height_lt?: Maybe<Float>;
-  height_lte?: Maybe<Float>;
-  height_gt?: Maybe<Float>;
-  height_gte?: Maybe<Float>;
-  weight?: Maybe<Float>;
-  weight_not?: Maybe<Float>;
-  weight_in?: Maybe<Float[] | Float>;
-  weight_not_in?: Maybe<Float[] | Float>;
-  weight_lt?: Maybe<Float>;
-  weight_lte?: Maybe<Float>;
-  weight_gt?: Maybe<Float>;
-  weight_gte?: Maybe<Float>;
-  heal?: Maybe<Int>;
-  heal_not?: Maybe<Int>;
-  heal_in?: Maybe<Int[] | Int>;
-  heal_not_in?: Maybe<Int[] | Int>;
-  heal_lt?: Maybe<Int>;
-  heal_lte?: Maybe<Int>;
-  heal_gt?: Maybe<Int>;
-  heal_gte?: Maybe<Int>;
-  herd?: Maybe<HerdWhereInput>;
-  device?: Maybe<String>;
-  device_not?: Maybe<String>;
-  device_in?: Maybe<String[] | String>;
-  device_not_in?: Maybe<String[] | String>;
-  device_lt?: Maybe<String>;
-  device_lte?: Maybe<String>;
-  device_gt?: Maybe<String>;
-  device_gte?: Maybe<String>;
-  device_contains?: Maybe<String>;
-  device_not_contains?: Maybe<String>;
-  device_starts_with?: Maybe<String>;
-  device_not_starts_with?: Maybe<String>;
-  device_ends_with?: Maybe<String>;
-  device_not_ends_with?: Maybe<String>;
+  herdsman?: Maybe<UserWhereInput>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
+  location?: Maybe<String>;
+  location_not?: Maybe<String>;
+  location_in?: Maybe<String[] | String>;
+  location_not_in?: Maybe<String[] | String>;
+  location_lt?: Maybe<String>;
+  location_lte?: Maybe<String>;
+  location_gt?: Maybe<String>;
+  location_gte?: Maybe<String>;
+  location_contains?: Maybe<String>;
+  location_not_contains?: Maybe<String>;
+  location_starts_with?: Maybe<String>;
+  location_not_starts_with?: Maybe<String>;
+  location_ends_with?: Maybe<String>;
+  location_not_ends_with?: Maybe<String>;
+  cows_every?: Maybe<CowWhereInput>;
+  cows_some?: Maybe<CowWhereInput>;
+  cows_none?: Maybe<CowWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -370,9 +376,119 @@ export interface CowWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CowWhereInput[] | CowWhereInput>;
-  OR?: Maybe<CowWhereInput[] | CowWhereInput>;
-  NOT?: Maybe<CowWhereInput[] | CowWhereInput>;
+  AND?: Maybe<HerdWhereInput[] | HerdWhereInput>;
+  OR?: Maybe<HerdWhereInput[] | HerdWhereInput>;
+  NOT?: Maybe<HerdWhereInput[] | HerdWhereInput>;
+}
+
+export interface CowSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CowWhereInput>;
+  AND?: Maybe<CowSubscriptionWhereInput[] | CowSubscriptionWhereInput>;
+  OR?: Maybe<CowSubscriptionWhereInput[] | CowSubscriptionWhereInput>;
+  NOT?: Maybe<CowSubscriptionWhereInput[] | CowSubscriptionWhereInput>;
+}
+
+export interface CowCreateInput {
+  id?: Maybe<ID_Input>;
+  height: Float;
+  weight: Float;
+  heal: Int;
+  herd: HerdCreateOneWithoutCowsInput;
+  images?: Maybe<CowCreateimagesInput>;
+  device?: Maybe<String>;
+}
+
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  phone?: Maybe<String>;
+  profession?: Maybe<String>;
+  localisation?: Maybe<String>;
+  nativeCountry?: Maybe<String>;
+  residentCountry?: Maybe<String>;
+  others?: Maybe<String>;
+  password?: Maybe<String>;
+  status?: Maybe<Boolean>;
+}
+
+export interface HerdCreateOneWithoutCowsInput {
+  create?: Maybe<HerdCreateWithoutCowsInput>;
+  connect?: Maybe<HerdWhereUniqueInput>;
+}
+
+export interface CowUpdateManyDataInput {
+  height?: Maybe<Float>;
+  weight?: Maybe<Float>;
+  heal?: Maybe<Int>;
+  images?: Maybe<CowUpdateimagesInput>;
+  device?: Maybe<String>;
+}
+
+export interface HerdCreateWithoutCowsInput {
+  id?: Maybe<ID_Input>;
+  herdsman: UserCreateOneInput;
+  image?: Maybe<String>;
+  location?: Maybe<String>;
+}
+
+export interface CowUpdateManyWithWhereNestedInput {
+  where: CowScalarWhereInput;
+  data: CowUpdateManyDataInput;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface CowUpsertWithWhereUniqueWithoutHerdInput {
+  where: CowWhereUniqueInput;
+  update: CowUpdateWithoutHerdDataInput;
+  create: CowCreateWithoutHerdInput;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  phone: String;
+  profession: String;
+  localisation: String;
+  nativeCountry: String;
+  residentCountry: String;
+  others: String;
+  password: String;
+  status: Boolean;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  phone?: Maybe<String>;
+}>;
+
+export interface CowCreateimagesInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface CowCreateManyWithoutHerdInput {
+  create?: Maybe<CowCreateWithoutHerdInput[] | CowCreateWithoutHerdInput>;
+  connect?: Maybe<CowWhereUniqueInput[] | CowWhereUniqueInput>;
 }
 
 export interface UserWhereInput {
@@ -516,6 +632,8 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  status?: Maybe<Boolean>;
+  status_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -535,125 +653,6 @@ export interface UserWhereInput {
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export interface CowSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CowWhereInput>;
-  AND?: Maybe<CowSubscriptionWhereInput[] | CowSubscriptionWhereInput>;
-  OR?: Maybe<CowSubscriptionWhereInput[] | CowSubscriptionWhereInput>;
-  NOT?: Maybe<CowSubscriptionWhereInput[] | CowSubscriptionWhereInput>;
-}
-
-export interface CowCreateInput {
-  id?: Maybe<ID_Input>;
-  height: Float;
-  weight: Float;
-  heal: Int;
-  herd: HerdCreateOneWithoutCowsInput;
-  images?: Maybe<CowCreateimagesInput>;
-  device?: Maybe<String>;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<String>;
-  profession?: Maybe<String>;
-  localisation?: Maybe<String>;
-  nativeCountry?: Maybe<String>;
-  residentCountry?: Maybe<String>;
-  others?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export interface HerdCreateOneWithoutCowsInput {
-  create?: Maybe<HerdCreateWithoutCowsInput>;
-  connect?: Maybe<HerdWhereUniqueInput>;
-}
-
-export interface CowUpdateManyDataInput {
-  height?: Maybe<Float>;
-  weight?: Maybe<Float>;
-  heal?: Maybe<Int>;
-  images?: Maybe<CowUpdateimagesInput>;
-  device?: Maybe<String>;
-}
-
-export interface HerdCreateWithoutCowsInput {
-  id?: Maybe<ID_Input>;
-  herdsman: UserCreateOneInput;
-  image?: Maybe<String>;
-  location?: Maybe<String>;
-}
-
-export interface CowUpdateManyWithWhereNestedInput {
-  where: CowScalarWhereInput;
-  data: CowUpdateManyDataInput;
-}
-
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface CowUpsertWithWhereUniqueWithoutHerdInput {
-  where: CowWhereUniqueInput;
-  update: CowUpdateWithoutHerdDataInput;
-  create: CowCreateWithoutHerdInput;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  phone: String;
-  profession: String;
-  localisation: String;
-  nativeCountry: String;
-  residentCountry: String;
-  others: String;
-  password: String;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-  phone?: Maybe<String>;
-}>;
-
-export interface CowCreateimagesInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface CowCreateManyWithoutHerdInput {
-  create?: Maybe<CowCreateWithoutHerdInput[] | CowCreateWithoutHerdInput>;
-  connect?: Maybe<CowWhereUniqueInput[] | CowWhereUniqueInput>;
-}
-
-export interface HerdSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<HerdWhereInput>;
-  AND?: Maybe<HerdSubscriptionWhereInput[] | HerdSubscriptionWhereInput>;
-  OR?: Maybe<HerdSubscriptionWhereInput[] | HerdSubscriptionWhereInput>;
-  NOT?: Maybe<HerdSubscriptionWhereInput[] | HerdSubscriptionWhereInput>;
 }
 
 export interface HerdUpdateOneRequiredWithoutCowsInput {
@@ -785,9 +784,10 @@ export interface UserUpdateDataInput {
   residentCountry?: Maybe<String>;
   others?: Maybe<String>;
   password?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
-export interface HerdWhereInput {
+export interface CowWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -802,38 +802,45 @@ export interface HerdWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  herdsman?: Maybe<UserWhereInput>;
-  image?: Maybe<String>;
-  image_not?: Maybe<String>;
-  image_in?: Maybe<String[] | String>;
-  image_not_in?: Maybe<String[] | String>;
-  image_lt?: Maybe<String>;
-  image_lte?: Maybe<String>;
-  image_gt?: Maybe<String>;
-  image_gte?: Maybe<String>;
-  image_contains?: Maybe<String>;
-  image_not_contains?: Maybe<String>;
-  image_starts_with?: Maybe<String>;
-  image_not_starts_with?: Maybe<String>;
-  image_ends_with?: Maybe<String>;
-  image_not_ends_with?: Maybe<String>;
-  location?: Maybe<String>;
-  location_not?: Maybe<String>;
-  location_in?: Maybe<String[] | String>;
-  location_not_in?: Maybe<String[] | String>;
-  location_lt?: Maybe<String>;
-  location_lte?: Maybe<String>;
-  location_gt?: Maybe<String>;
-  location_gte?: Maybe<String>;
-  location_contains?: Maybe<String>;
-  location_not_contains?: Maybe<String>;
-  location_starts_with?: Maybe<String>;
-  location_not_starts_with?: Maybe<String>;
-  location_ends_with?: Maybe<String>;
-  location_not_ends_with?: Maybe<String>;
-  cows_every?: Maybe<CowWhereInput>;
-  cows_some?: Maybe<CowWhereInput>;
-  cows_none?: Maybe<CowWhereInput>;
+  height?: Maybe<Float>;
+  height_not?: Maybe<Float>;
+  height_in?: Maybe<Float[] | Float>;
+  height_not_in?: Maybe<Float[] | Float>;
+  height_lt?: Maybe<Float>;
+  height_lte?: Maybe<Float>;
+  height_gt?: Maybe<Float>;
+  height_gte?: Maybe<Float>;
+  weight?: Maybe<Float>;
+  weight_not?: Maybe<Float>;
+  weight_in?: Maybe<Float[] | Float>;
+  weight_not_in?: Maybe<Float[] | Float>;
+  weight_lt?: Maybe<Float>;
+  weight_lte?: Maybe<Float>;
+  weight_gt?: Maybe<Float>;
+  weight_gte?: Maybe<Float>;
+  heal?: Maybe<Int>;
+  heal_not?: Maybe<Int>;
+  heal_in?: Maybe<Int[] | Int>;
+  heal_not_in?: Maybe<Int[] | Int>;
+  heal_lt?: Maybe<Int>;
+  heal_lte?: Maybe<Int>;
+  heal_gt?: Maybe<Int>;
+  heal_gte?: Maybe<Int>;
+  herd?: Maybe<HerdWhereInput>;
+  device?: Maybe<String>;
+  device_not?: Maybe<String>;
+  device_in?: Maybe<String[] | String>;
+  device_not_in?: Maybe<String[] | String>;
+  device_lt?: Maybe<String>;
+  device_lte?: Maybe<String>;
+  device_gt?: Maybe<String>;
+  device_gte?: Maybe<String>;
+  device_contains?: Maybe<String>;
+  device_not_contains?: Maybe<String>;
+  device_starts_with?: Maybe<String>;
+  device_not_starts_with?: Maybe<String>;
+  device_ends_with?: Maybe<String>;
+  device_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -850,9 +857,9 @@ export interface HerdWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<HerdWhereInput[] | HerdWhereInput>;
-  OR?: Maybe<HerdWhereInput[] | HerdWhereInput>;
-  NOT?: Maybe<HerdWhereInput[] | HerdWhereInput>;
+  AND?: Maybe<CowWhereInput[] | CowWhereInput>;
+  OR?: Maybe<CowWhereInput[] | CowWhereInput>;
+  NOT?: Maybe<CowWhereInput[] | CowWhereInput>;
 }
 
 export interface CowUpdateWithoutHerdDataInput {
@@ -877,6 +884,7 @@ export interface UserUpdateManyMutationInput {
   residentCountry?: Maybe<String>;
   others?: Maybe<String>;
   password?: Maybe<String>;
+  status?: Maybe<Boolean>;
 }
 
 export interface NodeNode {
@@ -894,6 +902,7 @@ export interface UserPreviousValues {
   residentCountry: String;
   others: String;
   password: String;
+  status: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -911,6 +920,7 @@ export interface UserPreviousValuesPromise
   residentCountry: () => Promise<String>;
   others: () => Promise<String>;
   password: () => Promise<String>;
+  status: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -928,6 +938,7 @@ export interface UserPreviousValuesSubscription
   residentCountry: () => Promise<AsyncIterator<String>>;
   others: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1015,86 +1026,6 @@ export interface HerdNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface User {
-  id: ID_Output;
-  name: String;
-  email: String;
-  phone: String;
-  profession: String;
-  localisation: String;
-  nativeCountry: String;
-  residentCountry: String;
-  others: String;
-  password: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  phone: () => Promise<String>;
-  profession: () => Promise<String>;
-  localisation: () => Promise<String>;
-  nativeCountry: () => Promise<String>;
-  residentCountry: () => Promise<String>;
-  others: () => Promise<String>;
-  password: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  phone: () => Promise<AsyncIterator<String>>;
-  profession: () => Promise<AsyncIterator<String>>;
-  localisation: () => Promise<AsyncIterator<String>>;
-  nativeCountry: () => Promise<AsyncIterator<String>>;
-  residentCountry: () => Promise<AsyncIterator<String>>;
-  others: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface UserNullablePromise
-  extends Promise<User | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  phone: () => Promise<String>;
-  profession: () => Promise<String>;
-  localisation: () => Promise<String>;
-  nativeCountry: () => Promise<String>;
-  residentCountry: () => Promise<String>;
-  others: () => Promise<String>;
-  password: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
 export interface PageInfo {
   hasNextPage: Boolean;
   hasPreviousPage: Boolean;
@@ -1118,20 +1049,20 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  count: () => Promise<Int>;
+  count: () => Promise<Long>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface CowConnection {
@@ -1153,6 +1084,90 @@ export interface CowConnectionSubscription
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <T = Promise<AsyncIterator<CowEdgeSubscription>>>() => T;
   aggregate: <T = AggregateCowSubscription>() => T;
+}
+
+export interface User {
+  id: ID_Output;
+  name: String;
+  email: String;
+  phone: String;
+  profession: String;
+  localisation: String;
+  nativeCountry: String;
+  residentCountry: String;
+  others: String;
+  password: String;
+  status: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  phone: () => Promise<String>;
+  profession: () => Promise<String>;
+  localisation: () => Promise<String>;
+  nativeCountry: () => Promise<String>;
+  residentCountry: () => Promise<String>;
+  others: () => Promise<String>;
+  password: () => Promise<String>;
+  status: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  phone: () => Promise<AsyncIterator<String>>;
+  profession: () => Promise<AsyncIterator<String>>;
+  localisation: () => Promise<AsyncIterator<String>>;
+  nativeCountry: () => Promise<AsyncIterator<String>>;
+  residentCountry: () => Promise<AsyncIterator<String>>;
+  others: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  phone: () => Promise<String>;
+  profession: () => Promise<String>;
+  localisation: () => Promise<String>;
+  nativeCountry: () => Promise<String>;
+  residentCountry: () => Promise<String>;
+  others: () => Promise<String>;
+  password: () => Promise<String>;
+  status: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserConnection {
@@ -1458,9 +1473,9 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
-export type Boolean = boolean;
+export type Int = number;
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
@@ -1468,14 +1483,9 @@ The `Float` scalar type represents signed double-precision fractional values as 
 export type Float = number;
 
 /*
-DateTime scalar input type, allowing Date
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type DateTimeInput = Date | string;
-
-/*
-DateTime scalar output type, which is always a string
-*/
-export type DateTimeOutput = string;
+export type Boolean = boolean;
 
 export type Long = string;
 
@@ -1486,9 +1496,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+DateTime scalar input type, allowing Date
 */
-export type Int = number;
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 /**
  * Model Metadata

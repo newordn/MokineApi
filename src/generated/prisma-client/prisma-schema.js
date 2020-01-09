@@ -589,6 +589,7 @@ type User {
   residentCountry: String!
   others: String!
   password: String!
+  status: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -610,6 +611,7 @@ input UserCreateInput {
   residentCountry: String!
   others: String!
   password: String!
+  status: Boolean!
 }
 
 input UserCreateOneInput {
@@ -643,6 +645,8 @@ enum UserOrderByInput {
   others_DESC
   password_ASC
   password_DESC
+  status_ASC
+  status_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -660,6 +664,7 @@ type UserPreviousValues {
   residentCountry: String!
   others: String!
   password: String!
+  status: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -692,6 +697,7 @@ input UserUpdateDataInput {
   residentCountry: String
   others: String
   password: String
+  status: Boolean
 }
 
 input UserUpdateInput {
@@ -704,6 +710,7 @@ input UserUpdateInput {
   residentCountry: String
   others: String
   password: String
+  status: Boolean
 }
 
 input UserUpdateManyMutationInput {
@@ -716,6 +723,7 @@ input UserUpdateManyMutationInput {
   residentCountry: String
   others: String
   password: String
+  status: Boolean
 }
 
 input UserUpdateOneRequiredInput {
@@ -871,6 +879,8 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

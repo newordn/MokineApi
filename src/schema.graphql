@@ -6,6 +6,7 @@ type Query{
     users:[User!]!
 }
 type Mutation{
+    deleteUser(id:ID!): User!
     signIn(phone:String,password:String!):AuthPayload!
     signUp(name:String!,email:String!,phone:String!,profession:String!,localisation:String!,nativeCountry:String!,residentCountry:String!,others:String!,password:String!):AuthPayload!
 }
@@ -23,6 +24,7 @@ type User{
     nativeCountry:String!
     residentCountry:String!
     others:String!
+    status:Boolean!
     password:String!
 
 }

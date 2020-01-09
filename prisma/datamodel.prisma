@@ -9,6 +9,7 @@ type User{
     residentCountry:String!
     others:String!
     password:String!
+    status:Boolean!
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

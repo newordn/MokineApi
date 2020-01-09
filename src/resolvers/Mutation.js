@@ -3,7 +3,7 @@ const {APP_SECRET} = require('../../helpers/user')
 const jwt = require('jsonwebtoken')
 const signUp = async (parent,args,context,info)=>{
     const password = await bcrypt.hash(args.password,10)
-    const user = await context.prisma.createUser({...args,password})
+    const user = await context.prisma.createUser({...args,password,status:true})
     const token = jwt.sign({userId:user.id},APP_SECRET)
     return {token,user}
 }
@@ -23,8 +23,20 @@ async function signIn(parent,args,context,info)
         user
     }
 }
+const deleteUser = async (parent,args,context,info)=>{
+const deleted = await context.prisma.updateUser({
+    data:{
+        status:false
+    },
+    where:{
+        id:args.id
+    }
+})
+return deleted
+}
 
 module.exports={
     signUp,
-    signIn
+    signIn,
+    deleteUser
 }
