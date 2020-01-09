@@ -3,6 +3,7 @@ const typeDefs = `
 scalar Upload
 type Query{
     info:String!
+    users:[User!]!
 }
 type Mutation{
     signIn(phone:String,password:String!):AuthPayload!
