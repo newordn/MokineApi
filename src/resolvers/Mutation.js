@@ -35,8 +35,20 @@ const deleted = await context.prisma.updateUser({
 return deleted
 }
 
+const updateUser = async (parent,args,context,info)=>{
+    const data = {}
+    data[`${args.field}`] = args.value
+    const updated = await context.prisma.updateUser({
+        data:data,  
+        where:{
+            id:args.id
+        }
+    })
+    return updated
+    }
 module.exports={
     signUp,
     signIn,
-    deleteUser
+    deleteUser,
+    updateUser
 }
