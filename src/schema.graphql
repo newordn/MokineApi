@@ -6,6 +6,7 @@ type Query{
     users:[User!]!
 }
 type Mutation{
+    sendingCode(id:ID!): String!
     updateUser(id:ID!,field:String!,value:String!): User!
     deleteUser(id:ID!): User!
     signIn(phone:String,password:String!):AuthPayload!
@@ -26,6 +27,7 @@ type User{
     residentCountry:String!
     others:String!
     status:Boolean!
+    reset_password_token:String
     password:String!
 
 }

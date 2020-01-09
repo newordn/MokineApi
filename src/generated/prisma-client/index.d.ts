@@ -230,6 +230,8 @@ export type UserOrderByInput =
   | "password_DESC"
   | "status_ASC"
   | "status_DESC"
+  | "reset_password_token_ASC"
+  | "reset_password_token_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -413,6 +415,7 @@ export interface UserUpdateInput {
   others?: Maybe<String>;
   password?: Maybe<String>;
   status?: Maybe<Boolean>;
+  reset_password_token?: Maybe<String>;
 }
 
 export interface HerdCreateOneWithoutCowsInput {
@@ -463,6 +466,7 @@ export interface UserCreateInput {
   others: String;
   password: String;
   status: Boolean;
+  reset_password_token?: Maybe<String>;
 }
 
 export type UserWhereUniqueInput = AtLeastOne<{
@@ -634,6 +638,20 @@ export interface UserWhereInput {
   password_not_ends_with?: Maybe<String>;
   status?: Maybe<Boolean>;
   status_not?: Maybe<Boolean>;
+  reset_password_token?: Maybe<String>;
+  reset_password_token_not?: Maybe<String>;
+  reset_password_token_in?: Maybe<String[] | String>;
+  reset_password_token_not_in?: Maybe<String[] | String>;
+  reset_password_token_lt?: Maybe<String>;
+  reset_password_token_lte?: Maybe<String>;
+  reset_password_token_gt?: Maybe<String>;
+  reset_password_token_gte?: Maybe<String>;
+  reset_password_token_contains?: Maybe<String>;
+  reset_password_token_not_contains?: Maybe<String>;
+  reset_password_token_starts_with?: Maybe<String>;
+  reset_password_token_not_starts_with?: Maybe<String>;
+  reset_password_token_ends_with?: Maybe<String>;
+  reset_password_token_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -785,6 +803,7 @@ export interface UserUpdateDataInput {
   others?: Maybe<String>;
   password?: Maybe<String>;
   status?: Maybe<Boolean>;
+  reset_password_token?: Maybe<String>;
 }
 
 export interface CowWhereInput {
@@ -885,6 +904,7 @@ export interface UserUpdateManyMutationInput {
   others?: Maybe<String>;
   password?: Maybe<String>;
   status?: Maybe<Boolean>;
+  reset_password_token?: Maybe<String>;
 }
 
 export interface NodeNode {
@@ -903,6 +923,7 @@ export interface UserPreviousValues {
   others: String;
   password: String;
   status: Boolean;
+  reset_password_token?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -921,6 +942,7 @@ export interface UserPreviousValuesPromise
   others: () => Promise<String>;
   password: () => Promise<String>;
   status: () => Promise<Boolean>;
+  reset_password_token: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -939,6 +961,7 @@ export interface UserPreviousValuesSubscription
   others: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<Boolean>>;
+  reset_password_token: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1098,6 +1121,7 @@ export interface User {
   others: String;
   password: String;
   status: Boolean;
+  reset_password_token?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1114,6 +1138,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   others: () => Promise<String>;
   password: () => Promise<String>;
   status: () => Promise<Boolean>;
+  reset_password_token: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1132,6 +1157,7 @@ export interface UserSubscription
   others: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<Boolean>>;
+  reset_password_token: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1150,6 +1176,7 @@ export interface UserNullablePromise
   others: () => Promise<String>;
   password: () => Promise<String>;
   status: () => Promise<Boolean>;
+  reset_password_token: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }

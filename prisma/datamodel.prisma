@@ -10,6 +10,7 @@ type User{
     others:String!
     password:String!
     status:Boolean!
+    reset_password_token:String
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

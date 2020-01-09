@@ -590,6 +590,7 @@ type User {
   others: String!
   password: String!
   status: Boolean!
+  reset_password_token: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -612,6 +613,7 @@ input UserCreateInput {
   others: String!
   password: String!
   status: Boolean!
+  reset_password_token: String
 }
 
 input UserCreateOneInput {
@@ -647,6 +649,8 @@ enum UserOrderByInput {
   password_DESC
   status_ASC
   status_DESC
+  reset_password_token_ASC
+  reset_password_token_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -665,6 +669,7 @@ type UserPreviousValues {
   others: String!
   password: String!
   status: Boolean!
+  reset_password_token: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -698,6 +703,7 @@ input UserUpdateDataInput {
   others: String
   password: String
   status: Boolean
+  reset_password_token: String
 }
 
 input UserUpdateInput {
@@ -711,6 +717,7 @@ input UserUpdateInput {
   others: String
   password: String
   status: Boolean
+  reset_password_token: String
 }
 
 input UserUpdateManyMutationInput {
@@ -724,6 +731,7 @@ input UserUpdateManyMutationInput {
   others: String
   password: String
   status: Boolean
+  reset_password_token: String
 }
 
 input UserUpdateOneRequiredInput {
@@ -881,6 +889,20 @@ input UserWhereInput {
   password_not_ends_with: String
   status: Boolean
   status_not: Boolean
+  reset_password_token: String
+  reset_password_token_not: String
+  reset_password_token_in: [String!]
+  reset_password_token_not_in: [String!]
+  reset_password_token_lt: String
+  reset_password_token_lte: String
+  reset_password_token_gt: String
+  reset_password_token_gte: String
+  reset_password_token_contains: String
+  reset_password_token_not_contains: String
+  reset_password_token_starts_with: String
+  reset_password_token_not_starts_with: String
+  reset_password_token_ends_with: String
+  reset_password_token_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
