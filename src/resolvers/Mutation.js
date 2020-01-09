@@ -55,9 +55,17 @@ const updateUser = async (parent,args,context,info)=>{
     }
 // to send a verification code
 const sendingCode = async (parent,args,context,info)=>{
-    const user = await context.prisma.user({id:args.id})
+    
     const generated = shortid.generate()
+    const user = await context.prisma.updateUser({data:{
+        reset_password_token: generated
+    },
+    where:{
+        id:args.id
+    }}
+    )
     const code = await sendMail(user.email,`Votre code de réinitialisation est :${generated}`,`Réinitialisation du mot de passe Mokine`)
+    
     return generated
     }
 module.exports={
