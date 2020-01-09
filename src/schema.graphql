@@ -5,6 +5,7 @@ type Query{
     info:String!
 }
 type Mutation{
+    signIn(phone:String,password:String!):AuthPayload!
     signUp(name:String!,email:String!,phone:String!,profession:String!,localisation:String!,nativeCountry:String!,residentCountry:String!,others:String!,password:String!):AuthPayload!
 }
 type AuthPayload{
