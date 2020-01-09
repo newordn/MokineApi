@@ -1,0 +1,47 @@
+const {GraphQLUpload} = require('graphql-upload')
+const typeDefs = `
+scalar Upload
+type Query{
+    info:String!
+}
+type Mutation{
+    signUp(name:String!,email:String!,phone:String!,profession:String!,localisation:String!,nativeCountry:String!,residentCountry:String!,others:String!,password:String!):AuthPayload!
+}
+type AuthPayload{
+    user: User!
+    token:String!
+}
+type User{
+    id: ID!
+    name: String!
+    email: String!
+    phone:String!
+    profession:String!
+    localisation: String!
+    nativeCountry:String!
+    residentCountry:String!
+    others:String!
+    password:String!
+
+}
+type Cow{
+    id:ID!
+    height: Float!
+    weight: Float!
+    heal: Int!
+    herd: Herd!
+    images: [String!]!
+    device: String
+}
+type Herd{
+    id:ID!
+    herdsman: User!,
+    image: String,
+    location:String,
+    cows: [Cow!]!
+}
+`
+
+module.exports={
+    typeDefs
+}

@@ -1,0 +1,34 @@
+type User{
+    id: ID! @id
+    name: String!
+    email: String! @unique
+    phone:String! @unique
+    profession:String!
+    localisation: String!
+    nativeCountry:String!
+    residentCountry:String!
+    others:String!
+    password:String!
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+type Cow{
+    id:ID! @id
+    height: Float!
+    weight: Float!
+    heal: Int!
+    herd: Herd!
+    images: [String!]! @scalarList(strategy: RELATION)
+    device: String @unique
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+type Herd{
+    id:ID! @id
+    herdsman: User!,
+    image: String,
+    location:String,
+    cows: [Cow!]!
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
