@@ -8,6 +8,7 @@ type Query{
     cowsByHerd(herdId:ID!): [Cow!]!
 }
 type Mutation{
+    cow(height:Float!,weight:Float!,heal:Int!,herd: Int!,images: [Upload!]!,device: String): Cow!
     resetPassword(newPassword:String!,id:ID!):User!
     sendingCode(id:ID!): String!
     updateUser(id:ID!,field:String!,value:String!): User!

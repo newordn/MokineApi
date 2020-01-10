@@ -82,11 +82,19 @@ const resetPassword = async (parent,args,context,info)=>{
     }) 
     return user
     }
+
+       // to create a cow
+const cow = async (parent,args,context,info)=>{
+    const images = await Promise.allSettled(args.images.map(async v=>await context.storeUpload(v)))
+    const cow  = context.prisma.createCow({...args,status:true,images,herd:{connect:{id:args.id}}})
+    return user
+    }
 module.exports={
     signUp,
     signIn,
     deleteUser,
     updateUser,
     sendingCode,
-    resetPassword
+    resetPassword,
+    cow
 }
