@@ -108,6 +108,12 @@ const herd = async (parent,args,context,info)=>{
 })
     return herd
     }
+       // to get a particular user with his id
+       const user = async (parent,args,context,info)=>{
+        console.log("Getting a user mutation")
+        const user = await context.prisma.user({id:args.id})
+        return user
+        }
 module.exports={
     signUp,
     signIn,
@@ -116,5 +122,6 @@ module.exports={
     sendingCode,
     resetPassword,
     cow,
-    herd
+    herd,
+    user
 }

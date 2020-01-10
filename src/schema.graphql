@@ -4,6 +4,7 @@ scalar Upload
 type Query{
     info:String!
     users:[User!]!
+    user(id:ID!):User!
     herds:[Herd]!
     cowsByHerd(herdId:ID!): [Cow!]!
 }
