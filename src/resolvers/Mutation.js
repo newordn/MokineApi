@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 
 // to sign up an user
 const signUp = async (parent,args,context,info)=>{
+    console.log("SignUp mutation")
     const password = await bcrypt.hash(args.password,10)
     const user = await context.prisma.createUser({...args,password,status:true})
     const token = jwt.sign({userId:user.id},APP_SECRET)
@@ -15,6 +16,7 @@ const signUp = async (parent,args,context,info)=>{
 // to signin an user
 async function signIn(parent,args,context,info)
 {
+    console.log("SignIn mutation")
     const user =  await context.prisma.user({phone:args.phone})
     if(!user){
         throw new Error("L'utilisateur n'existe pas. Inscrivez-vous")
@@ -31,6 +33,7 @@ async function signIn(parent,args,context,info)
 }
 // to delete a user
 const deleteUser = async (parent,args,context,info)=>{
+    console.log("deleteUser mutation")
 const deleted = await context.prisma.updateUser({
     data:{
         status:false
@@ -43,6 +46,7 @@ return deleted
 }
 // to update a user
 const updateUser = async (parent,args,context,info)=>{
+    console.log("UpdateUser mutation")
     const data = {}
     data[`${args.field}`] = args.value
     const updated = await context.prisma.updateUser({
@@ -55,7 +59,7 @@ const updateUser = async (parent,args,context,info)=>{
     }
 // to send a verification code
 const sendingCode = async (parent,args,context,info)=>{
-    
+    console.log("SendingCode mutation")
     const generated = shortid.generate()
     const user = await context.prisma.updateUser({data:{
         reset_password_token: generated
@@ -71,6 +75,7 @@ const sendingCode = async (parent,args,context,info)=>{
 
     // to reset the password
 const resetPassword = async (parent,args,context,info)=>{
+    console.log("resetPassword mutation")
     const newPassword = await bcrypt.hash(args.newPassword,10)
     const user = await context.prisma.updateUser({
         data:{
@@ -85,12 +90,14 @@ const resetPassword = async (parent,args,context,info)=>{
 
        // to create a cow
 const cow = async (parent,args,context,info)=>{
+    console.log("Create a cow mutation")
     const images = await Promise.allSettled(args.images.map(async v=>await context.storeUpload(v)))
     const cow  = context.prisma.createCow({...args,status:true,images:{set:images},herd:{connect:{id:args.herd}}})
     return user
     }
            // to create a herd
 const cow = async (parent,args,context,info)=>{
+    console.log("Create a herd mutation")
     const image = await  context.storeUpload(args.image)
     const cow  = await context.prisma.createCow({...args,status:true,image,herdsman:{connect:{id:args.herdsman}},cows:{
         connect:args.cows
