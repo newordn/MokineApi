@@ -19,9 +19,16 @@ const cowsByHerd = async (parent,args,context,info)=>{
     })
     return cows
 }
+  // to get a particular user with his id
+const user = async (parent,args,context,info)=>{
+console.log("Getting a user query")
+const user = await context.prisma.user({id:args.id})
+    return user
+}
 module.exports={
     info,
     users,
     herds,
-    cowsByHerd
+    cowsByHerd,
+    user
 }
