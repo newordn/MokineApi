@@ -28,6 +28,7 @@ type Cow {
   images: [String!]!
   device: String
   status: Boolean!
+  localisation: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -51,6 +52,7 @@ input CowCreateInput {
   images: CowCreateimagesInput
   device: String
   status: Boolean!
+  localisation: String!
 }
 
 input CowCreateManyWithoutHerdInput {
@@ -66,6 +68,7 @@ input CowCreateWithoutHerdInput {
   images: CowCreateimagesInput
   device: String
   status: Boolean!
+  localisation: String!
 }
 
 type CowEdge {
@@ -86,6 +89,8 @@ enum CowOrderByInput {
   device_DESC
   status_ASC
   status_DESC
+  localisation_ASC
+  localisation_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -100,6 +105,7 @@ type CowPreviousValues {
   images: [String!]!
   device: String
   status: Boolean!
+  localisation: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -159,6 +165,20 @@ input CowScalarWhereInput {
   device_not_ends_with: String
   status: Boolean
   status_not: Boolean
+  localisation: String
+  localisation_not: String
+  localisation_in: [String!]
+  localisation_not_in: [String!]
+  localisation_lt: String
+  localisation_lte: String
+  localisation_gt: String
+  localisation_gte: String
+  localisation_contains: String
+  localisation_not_contains: String
+  localisation_starts_with: String
+  localisation_not_starts_with: String
+  localisation_ends_with: String
+  localisation_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -210,6 +230,7 @@ input CowUpdateInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
+  localisation: String
 }
 
 input CowUpdateManyDataInput {
@@ -219,6 +240,7 @@ input CowUpdateManyDataInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
+  localisation: String
 }
 
 input CowUpdateManyMutationInput {
@@ -228,6 +250,7 @@ input CowUpdateManyMutationInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
+  localisation: String
 }
 
 input CowUpdateManyWithoutHerdInput {
@@ -254,6 +277,7 @@ input CowUpdateWithoutHerdDataInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
+  localisation: String
 }
 
 input CowUpdateWithWhereUniqueWithoutHerdInput {
@@ -323,6 +347,20 @@ input CowWhereInput {
   device_not_ends_with: String
   status: Boolean
   status_not: Boolean
+  localisation: String
+  localisation_not: String
+  localisation_in: [String!]
+  localisation_not_in: [String!]
+  localisation_lt: String
+  localisation_lte: String
+  localisation_gt: String
+  localisation_gte: String
+  localisation_contains: String
+  localisation_not_contains: String
+  localisation_starts_with: String
+  localisation_not_starts_with: String
+  localisation_ends_with: String
+  localisation_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

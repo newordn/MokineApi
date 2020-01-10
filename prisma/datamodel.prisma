@@ -23,6 +23,7 @@ type Cow{
     images: [String!]! @scalarList(strategy: RELATION)
     device: String @unique
     status: Boolean!
+    localisation: String!
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

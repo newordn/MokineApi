@@ -192,6 +192,8 @@ export type CowOrderByInput =
   | "device_DESC"
   | "status_ASC"
   | "status_DESC"
+  | "localisation_ASC"
+  | "localisation_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -251,6 +253,7 @@ export interface CowUpdateInput {
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
+  localisation?: Maybe<String>;
 }
 
 export type CowWhereUniqueInput = AtLeastOne<{
@@ -285,6 +288,7 @@ export interface CowUpdateManyMutationInput {
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
+  localisation?: Maybe<String>;
 }
 
 export interface HerdUpdateInput {
@@ -310,6 +314,7 @@ export interface CowCreateWithoutHerdInput {
   images?: Maybe<CowCreateimagesInput>;
   device?: Maybe<String>;
   status: Boolean;
+  localisation: String;
 }
 
 export interface HerdSubscriptionWhereInput {
@@ -413,6 +418,7 @@ export interface CowCreateInput {
   images?: Maybe<CowCreateimagesInput>;
   device?: Maybe<String>;
   status: Boolean;
+  localisation: String;
 }
 
 export interface UserUpdateInput {
@@ -441,6 +447,7 @@ export interface CowUpdateManyDataInput {
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
+  localisation?: Maybe<String>;
 }
 
 export interface HerdCreateWithoutCowsInput {
@@ -761,6 +768,20 @@ export interface CowScalarWhereInput {
   device_not_ends_with?: Maybe<String>;
   status?: Maybe<Boolean>;
   status_not?: Maybe<Boolean>;
+  localisation?: Maybe<String>;
+  localisation_not?: Maybe<String>;
+  localisation_in?: Maybe<String[] | String>;
+  localisation_not_in?: Maybe<String[] | String>;
+  localisation_lt?: Maybe<String>;
+  localisation_lte?: Maybe<String>;
+  localisation_gt?: Maybe<String>;
+  localisation_gte?: Maybe<String>;
+  localisation_contains?: Maybe<String>;
+  localisation_not_contains?: Maybe<String>;
+  localisation_starts_with?: Maybe<String>;
+  localisation_not_starts_with?: Maybe<String>;
+  localisation_ends_with?: Maybe<String>;
+  localisation_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -880,6 +901,20 @@ export interface CowWhereInput {
   device_not_ends_with?: Maybe<String>;
   status?: Maybe<Boolean>;
   status_not?: Maybe<Boolean>;
+  localisation?: Maybe<String>;
+  localisation_not?: Maybe<String>;
+  localisation_in?: Maybe<String[] | String>;
+  localisation_not_in?: Maybe<String[] | String>;
+  localisation_lt?: Maybe<String>;
+  localisation_lte?: Maybe<String>;
+  localisation_gt?: Maybe<String>;
+  localisation_gte?: Maybe<String>;
+  localisation_contains?: Maybe<String>;
+  localisation_not_contains?: Maybe<String>;
+  localisation_starts_with?: Maybe<String>;
+  localisation_not_starts_with?: Maybe<String>;
+  localisation_ends_with?: Maybe<String>;
+  localisation_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -908,6 +943,7 @@ export interface CowUpdateWithoutHerdDataInput {
   images?: Maybe<CowUpdateimagesInput>;
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
+  localisation?: Maybe<String>;
 }
 
 export type HerdWhereUniqueInput = AtLeastOne<{
@@ -1276,6 +1312,7 @@ export interface CowPreviousValues {
   images: String[];
   device?: String;
   status: Boolean;
+  localisation: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1290,6 +1327,7 @@ export interface CowPreviousValuesPromise
   images: () => Promise<String[]>;
   device: () => Promise<String>;
   status: () => Promise<Boolean>;
+  localisation: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1304,6 +1342,7 @@ export interface CowPreviousValuesSubscription
   images: () => Promise<AsyncIterator<String[]>>;
   device: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<Boolean>>;
+  localisation: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1374,6 +1413,7 @@ export interface Cow {
   images: String[];
   device?: String;
   status: Boolean;
+  localisation: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1387,6 +1427,7 @@ export interface CowPromise extends Promise<Cow>, Fragmentable {
   images: () => Promise<String[]>;
   device: () => Promise<String>;
   status: () => Promise<Boolean>;
+  localisation: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1402,6 +1443,7 @@ export interface CowSubscription
   images: () => Promise<AsyncIterator<String[]>>;
   device: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<Boolean>>;
+  localisation: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1415,6 +1457,7 @@ export interface CowNullablePromise extends Promise<Cow | null>, Fragmentable {
   images: () => Promise<String[]>;
   device: () => Promise<String>;
   status: () => Promise<Boolean>;
+  localisation: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
