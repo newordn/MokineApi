@@ -34,6 +34,7 @@ type Herd{
     location:String,
     cows: [Cow!]!
     status: Boolean!
+    catterys: [User!]!
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

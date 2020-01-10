@@ -86,8 +86,20 @@ const resetPassword = async (parent,args,context,info)=>{
        // to create a cow
 const cow = async (parent,args,context,info)=>{
     const images = await Promise.allSettled(args.images.map(async v=>await context.storeUpload(v)))
-    const cow  = context.prisma.createCow({...args,status:true,images,herd:{connect:{id:args.id}}})
+    const cow  = context.prisma.createCow({...args,status:true,images:{set:images},herd:{connect:{id:args.herd}}})
     return user
+    }
+           // to create a herd
+const cow = async (parent,args,context,info)=>{
+    const image = await  context.storeUpload(args.image)
+    const cow  = await context.prisma.createCow({...args,status:true,image,herdsman:{connect:{id:args.herdsman}},cows:{
+        connect:args.cows
+    },
+    catterys:{
+        connect:args.catterys
+    }    
+})
+    return cow
     }
 module.exports={
     signUp,
@@ -96,5 +108,6 @@ module.exports={
     updateUser,
     sendingCode,
     resetPassword,
-    cow
+    cow,
+    herd
 }
