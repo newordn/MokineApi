@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const shortid = require('shortid')
-const {APP_SECRET} = require('../../helpers/user')
-const {sendMail} = require('../../helpers/mail')
+const {APP_SECRET} = require('../helpers/user')
+const {sendMail} = require('../helpers/mail')
 const jwt = require('jsonwebtoken')
 
 // to sign up an user

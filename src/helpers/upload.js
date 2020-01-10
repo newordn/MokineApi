@@ -14,8 +14,6 @@ const drive = google.drive({
   version:'v3',
   auth
 })
-// Ensure upload directory exists.
-mkdirp.sync(UPLOAD_DIR)
 
 const storeUpload = async upload => {
   const { createReadStream, filename, mimetype } = await upload
