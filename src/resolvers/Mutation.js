@@ -100,11 +100,13 @@ const cow = async (parent,args,context,info)=>{
 const herd = async (parent,args,context,info)=>{
     console.log("Create a herd mutation")
     const image = await  context.storeUpload(args.image).path
+    const cows = args.cows.map( v=>({id: v}))
+    const catterys = args.catterys.map( v=>({id: v}))
     const herd  = await context.prisma.createHerd({...args,status:true,image,cows:{
-        connect:args.cows
+        connect:cows
     },
     catterys:{
-        connect:args.catterys
+        connect:catterys
     }    
 })
     return herd
