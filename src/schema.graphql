@@ -50,6 +50,7 @@ type Cow{
     device: String
     status: Boolean!
     location: String!
+    myId: String!
 }
 type Herd{
     id:ID!
