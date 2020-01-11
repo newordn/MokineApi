@@ -13,13 +13,14 @@ type User{
     reset_password_token:String
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
+    herd: Herd @relation(name:"HerdUser")
 }
 type Cow{
     id:ID! @id
     height: Float!
     weight: Float!
     heal: Int!
-    herd: Herd!
+    herd: Herd
     images: [String!]! @scalarList(strategy: RELATION)
     device: String @unique
     status: Boolean!
@@ -29,12 +30,11 @@ type Cow{
 }
 type Herd{
     id:ID! @id
-    herdsman: User!,
     image: String,
     location:String,
     cows: [Cow!]!
     status: Boolean!
-    catterys: [User!]!
+    catterys: [User!]! @relation(name:"HerdUser")
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

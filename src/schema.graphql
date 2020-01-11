@@ -8,6 +8,7 @@ type Query{
     user(id:ID!):User!
     herds:[Herd]!
     cowsByHerd(herdId:ID!): [Cow!]!
+    cowsWithoutHerd:[Cow!]!
 }
 type Mutation{
     herd(herdsman:ID!,image:Upload!,location:String!,cows:[ID!]!,catterys:[ID!]!): Herd!
@@ -43,7 +44,7 @@ type Cow{
     height: Float!
     weight: Float!
     heal: Int!
-    herd: Herd!
+    herd: Herd
     images: [String!]!
     device: String
     status: Boolean!

@@ -24,7 +24,7 @@ type Cow {
   height: Float!
   weight: Float!
   heal: Int!
-  herd: Herd!
+  herd: Herd
   images: [String!]!
   device: String
   status: Boolean!
@@ -48,7 +48,7 @@ input CowCreateInput {
   height: Float!
   weight: Float!
   heal: Int!
-  herd: HerdCreateOneWithoutCowsInput!
+  herd: HerdCreateOneWithoutCowsInput
   images: CowCreateimagesInput
   device: String
   status: Boolean!
@@ -226,7 +226,7 @@ input CowUpdateInput {
   height: Float
   weight: Float
   heal: Int
-  herd: HerdUpdateOneRequiredWithoutCowsInput
+  herd: HerdUpdateOneWithoutCowsInput
   images: CowUpdateimagesInput
   device: String
   status: Boolean
@@ -391,11 +391,11 @@ scalar DateTime
 
 type Herd {
   id: ID!
-  herdsman: User!
   image: String
   location: String
   cows(where: CowWhereInput, orderBy: CowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cow!]
   status: Boolean!
+  catterys(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -408,11 +408,16 @@ type HerdConnection {
 
 input HerdCreateInput {
   id: ID
-  herdsman: UserCreateOneInput!
   image: String
   location: String
   cows: CowCreateManyWithoutHerdInput
   status: Boolean!
+  catterys: UserCreateManyWithoutHerdInput
+}
+
+input HerdCreateOneWithoutCatterysInput {
+  create: HerdCreateWithoutCatterysInput
+  connect: HerdWhereUniqueInput
 }
 
 input HerdCreateOneWithoutCowsInput {
@@ -420,12 +425,20 @@ input HerdCreateOneWithoutCowsInput {
   connect: HerdWhereUniqueInput
 }
 
+input HerdCreateWithoutCatterysInput {
+  id: ID
+  image: String
+  location: String
+  cows: CowCreateManyWithoutHerdInput
+  status: Boolean!
+}
+
 input HerdCreateWithoutCowsInput {
   id: ID
-  herdsman: UserCreateOneInput!
   image: String
   location: String
   status: Boolean!
+  catterys: UserCreateManyWithoutHerdInput
 }
 
 type HerdEdge {
@@ -476,11 +489,11 @@ input HerdSubscriptionWhereInput {
 }
 
 input HerdUpdateInput {
-  herdsman: UserUpdateOneRequiredInput
   image: String
   location: String
   cows: CowUpdateManyWithoutHerdInput
   status: Boolean
+  catterys: UserUpdateManyWithoutHerdInput
 }
 
 input HerdUpdateManyMutationInput {
@@ -489,18 +502,41 @@ input HerdUpdateManyMutationInput {
   status: Boolean
 }
 
-input HerdUpdateOneRequiredWithoutCowsInput {
-  create: HerdCreateWithoutCowsInput
-  update: HerdUpdateWithoutCowsDataInput
-  upsert: HerdUpsertWithoutCowsInput
+input HerdUpdateOneWithoutCatterysInput {
+  create: HerdCreateWithoutCatterysInput
+  update: HerdUpdateWithoutCatterysDataInput
+  upsert: HerdUpsertWithoutCatterysInput
+  delete: Boolean
+  disconnect: Boolean
   connect: HerdWhereUniqueInput
 }
 
+input HerdUpdateOneWithoutCowsInput {
+  create: HerdCreateWithoutCowsInput
+  update: HerdUpdateWithoutCowsDataInput
+  upsert: HerdUpsertWithoutCowsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: HerdWhereUniqueInput
+}
+
+input HerdUpdateWithoutCatterysDataInput {
+  image: String
+  location: String
+  cows: CowUpdateManyWithoutHerdInput
+  status: Boolean
+}
+
 input HerdUpdateWithoutCowsDataInput {
-  herdsman: UserUpdateOneRequiredInput
   image: String
   location: String
   status: Boolean
+  catterys: UserUpdateManyWithoutHerdInput
+}
+
+input HerdUpsertWithoutCatterysInput {
+  update: HerdUpdateWithoutCatterysDataInput!
+  create: HerdCreateWithoutCatterysInput!
 }
 
 input HerdUpsertWithoutCowsInput {
@@ -523,7 +559,6 @@ input HerdWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  herdsman: UserWhereInput
   image: String
   image_not: String
   image_in: [String!]
@@ -557,6 +592,9 @@ input HerdWhereInput {
   cows_none: CowWhereInput
   status: Boolean
   status_not: Boolean
+  catterys_every: UserWhereInput
+  catterys_some: UserWhereInput
+  catterys_none: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -656,6 +694,7 @@ type User {
   reset_password_token: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  herd: Herd
 }
 
 type UserConnection {
@@ -677,11 +716,27 @@ input UserCreateInput {
   password: String!
   status: Boolean!
   reset_password_token: String
+  herd: HerdCreateOneWithoutCatterysInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
+input UserCreateManyWithoutHerdInput {
+  create: [UserCreateWithoutHerdInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateWithoutHerdInput {
+  id: ID
+  name: String!
+  email: String!
+  phone: String!
+  profession: String!
+  localisation: String!
+  nativeCountry: String!
+  residentCountry: String!
+  others: String!
+  password: String!
+  status: Boolean!
+  reset_password_token: String
 }
 
 type UserEdge {
@@ -737,6 +792,184 @@ type UserPreviousValues {
   updatedAt: DateTime!
 }
 
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  profession: String
+  profession_not: String
+  profession_in: [String!]
+  profession_not_in: [String!]
+  profession_lt: String
+  profession_lte: String
+  profession_gt: String
+  profession_gte: String
+  profession_contains: String
+  profession_not_contains: String
+  profession_starts_with: String
+  profession_not_starts_with: String
+  profession_ends_with: String
+  profession_not_ends_with: String
+  localisation: String
+  localisation_not: String
+  localisation_in: [String!]
+  localisation_not_in: [String!]
+  localisation_lt: String
+  localisation_lte: String
+  localisation_gt: String
+  localisation_gte: String
+  localisation_contains: String
+  localisation_not_contains: String
+  localisation_starts_with: String
+  localisation_not_starts_with: String
+  localisation_ends_with: String
+  localisation_not_ends_with: String
+  nativeCountry: String
+  nativeCountry_not: String
+  nativeCountry_in: [String!]
+  nativeCountry_not_in: [String!]
+  nativeCountry_lt: String
+  nativeCountry_lte: String
+  nativeCountry_gt: String
+  nativeCountry_gte: String
+  nativeCountry_contains: String
+  nativeCountry_not_contains: String
+  nativeCountry_starts_with: String
+  nativeCountry_not_starts_with: String
+  nativeCountry_ends_with: String
+  nativeCountry_not_ends_with: String
+  residentCountry: String
+  residentCountry_not: String
+  residentCountry_in: [String!]
+  residentCountry_not_in: [String!]
+  residentCountry_lt: String
+  residentCountry_lte: String
+  residentCountry_gt: String
+  residentCountry_gte: String
+  residentCountry_contains: String
+  residentCountry_not_contains: String
+  residentCountry_starts_with: String
+  residentCountry_not_starts_with: String
+  residentCountry_ends_with: String
+  residentCountry_not_ends_with: String
+  others: String
+  others_not: String
+  others_in: [String!]
+  others_not_in: [String!]
+  others_lt: String
+  others_lte: String
+  others_gt: String
+  others_gte: String
+  others_contains: String
+  others_not_contains: String
+  others_starts_with: String
+  others_not_starts_with: String
+  others_ends_with: String
+  others_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  status: Boolean
+  status_not: Boolean
+  reset_password_token: String
+  reset_password_token_not: String
+  reset_password_token_in: [String!]
+  reset_password_token_not_in: [String!]
+  reset_password_token_lt: String
+  reset_password_token_lte: String
+  reset_password_token_gt: String
+  reset_password_token_gte: String
+  reset_password_token_contains: String
+  reset_password_token_not_contains: String
+  reset_password_token_starts_with: String
+  reset_password_token_not_starts_with: String
+  reset_password_token_ends_with: String
+  reset_password_token_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
 type UserSubscriptionPayload {
   mutation: MutationType!
   node: User
@@ -755,7 +988,7 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
-input UserUpdateDataInput {
+input UserUpdateInput {
   name: String
   email: String
   phone: String
@@ -767,9 +1000,10 @@ input UserUpdateDataInput {
   password: String
   status: Boolean
   reset_password_token: String
+  herd: HerdUpdateOneWithoutCatterysInput
 }
 
-input UserUpdateInput {
+input UserUpdateManyDataInput {
   name: String
   email: String
   phone: String
@@ -797,16 +1031,46 @@ input UserUpdateManyMutationInput {
   reset_password_token: String
 }
 
-input UserUpdateOneRequiredInput {
-  create: UserCreateInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-  connect: UserWhereUniqueInput
+input UserUpdateManyWithoutHerdInput {
+  create: [UserCreateWithoutHerdInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutHerdInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutHerdInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdateWithoutHerdDataInput {
+  name: String
+  email: String
+  phone: String
+  profession: String
+  localisation: String
+  nativeCountry: String
+  residentCountry: String
+  others: String
+  password: String
+  status: Boolean
+  reset_password_token: String
+}
+
+input UserUpdateWithWhereUniqueWithoutHerdInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutHerdDataInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutHerdInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutHerdDataInput!
+  create: UserCreateWithoutHerdInput!
 }
 
 input UserWhereInput {
@@ -982,6 +1246,7 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  herd: HerdWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
