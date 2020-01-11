@@ -65,7 +65,7 @@ const sendingCode = async (parent,args,context,info)=>{
         reset_password_token: generated
     },
     where:{
-        id:args.id
+        email:args.id
     }}
     )
     const code = await sendMail(user.email,`Votre code de réinitialisation est :${generated}`,`Réinitialisation du mot de passe Mokine`)
