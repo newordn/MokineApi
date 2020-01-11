@@ -37,6 +37,7 @@ type User{
     status:Boolean!
     reset_password_token:String
     password:String!
+    herd: Herd
 
 }
 type Cow{
@@ -52,7 +53,6 @@ type Cow{
 }
 type Herd{
     id:ID!
-    herdsman: User!
     image: String!
     location:String!
     cows: [Cow!]!
