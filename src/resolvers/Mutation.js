@@ -99,7 +99,7 @@ const cow = async (parent,args,context,info)=>{
            // to create a herd
 const herd = async (parent,args,context,info)=>{
     console.log("Create a herd mutation")
-    const image = await  context.storeUpload(args.image)
+    const image = await  context.storeUpload(args.image).path
     const herd  = await context.prisma.createHerd({...args,status:true,image,cows:{
         connect:args.cows
     },
