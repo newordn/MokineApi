@@ -31,6 +31,7 @@ type Cow {
   localisation: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  myId: String!
 }
 
 type CowConnection {
@@ -53,6 +54,7 @@ input CowCreateInput {
   device: String
   status: Boolean!
   localisation: String!
+  myId: String!
 }
 
 input CowCreateManyWithoutHerdInput {
@@ -69,6 +71,7 @@ input CowCreateWithoutHerdInput {
   device: String
   status: Boolean!
   localisation: String!
+  myId: String!
 }
 
 type CowEdge {
@@ -95,6 +98,8 @@ enum CowOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  myId_ASC
+  myId_DESC
 }
 
 type CowPreviousValues {
@@ -108,6 +113,7 @@ type CowPreviousValues {
   localisation: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  myId: String!
 }
 
 input CowScalarWhereInput {
@@ -195,6 +201,20 @@ input CowScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  myId: String
+  myId_not: String
+  myId_in: [String!]
+  myId_not_in: [String!]
+  myId_lt: String
+  myId_lte: String
+  myId_gt: String
+  myId_gte: String
+  myId_contains: String
+  myId_not_contains: String
+  myId_starts_with: String
+  myId_not_starts_with: String
+  myId_ends_with: String
+  myId_not_ends_with: String
   AND: [CowScalarWhereInput!]
   OR: [CowScalarWhereInput!]
   NOT: [CowScalarWhereInput!]
@@ -231,6 +251,7 @@ input CowUpdateInput {
   device: String
   status: Boolean
   localisation: String
+  myId: String
 }
 
 input CowUpdateManyDataInput {
@@ -241,6 +262,7 @@ input CowUpdateManyDataInput {
   device: String
   status: Boolean
   localisation: String
+  myId: String
 }
 
 input CowUpdateManyMutationInput {
@@ -251,6 +273,7 @@ input CowUpdateManyMutationInput {
   device: String
   status: Boolean
   localisation: String
+  myId: String
 }
 
 input CowUpdateManyWithoutHerdInput {
@@ -278,6 +301,7 @@ input CowUpdateWithoutHerdDataInput {
   device: String
   status: Boolean
   localisation: String
+  myId: String
 }
 
 input CowUpdateWithWhereUniqueWithoutHerdInput {
@@ -377,6 +401,20 @@ input CowWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  myId: String
+  myId_not: String
+  myId_in: [String!]
+  myId_not_in: [String!]
+  myId_lt: String
+  myId_lte: String
+  myId_gt: String
+  myId_gte: String
+  myId_contains: String
+  myId_not_contains: String
+  myId_starts_with: String
+  myId_not_starts_with: String
+  myId_ends_with: String
+  myId_not_ends_with: String
   AND: [CowWhereInput!]
   OR: [CowWhereInput!]
   NOT: [CowWhereInput!]

@@ -197,7 +197,9 @@ export type CowOrderByInput =
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "updatedAt_DESC"
+  | "myId_ASC"
+  | "myId_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -359,6 +361,7 @@ export interface CowUpdateInput {
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
   localisation?: Maybe<String>;
+  myId?: Maybe<String>;
 }
 
 export interface HerdUpdateWithoutCatterysDataInput {
@@ -452,6 +455,7 @@ export interface CowUpdateManyDataInput {
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
   localisation?: Maybe<String>;
+  myId?: Maybe<String>;
 }
 
 export interface CowUpdateWithoutHerdDataInput {
@@ -462,6 +466,7 @@ export interface CowUpdateWithoutHerdDataInput {
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
   localisation?: Maybe<String>;
+  myId?: Maybe<String>;
 }
 
 export interface CowUpdateManyWithWhereNestedInput {
@@ -669,6 +674,7 @@ export interface CowCreateInput {
   device?: Maybe<String>;
   status: Boolean;
   localisation: String;
+  myId: String;
 }
 
 export interface CowWhereInput {
@@ -757,6 +763,20 @@ export interface CowWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
+  myId?: Maybe<String>;
+  myId_not?: Maybe<String>;
+  myId_in?: Maybe<String[] | String>;
+  myId_not_in?: Maybe<String[] | String>;
+  myId_lt?: Maybe<String>;
+  myId_lte?: Maybe<String>;
+  myId_gt?: Maybe<String>;
+  myId_gte?: Maybe<String>;
+  myId_contains?: Maybe<String>;
+  myId_not_contains?: Maybe<String>;
+  myId_starts_with?: Maybe<String>;
+  myId_not_starts_with?: Maybe<String>;
+  myId_ends_with?: Maybe<String>;
+  myId_not_ends_with?: Maybe<String>;
   AND?: Maybe<CowWhereInput[] | CowWhereInput>;
   OR?: Maybe<CowWhereInput[] | CowWhereInput>;
   NOT?: Maybe<CowWhereInput[] | CowWhereInput>;
@@ -991,6 +1011,7 @@ export interface CowUpdateManyMutationInput {
   device?: Maybe<String>;
   status?: Maybe<Boolean>;
   localisation?: Maybe<String>;
+  myId?: Maybe<String>;
 }
 
 export interface CowScalarWhereInput {
@@ -1078,6 +1099,20 @@ export interface CowScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
+  myId?: Maybe<String>;
+  myId_not?: Maybe<String>;
+  myId_in?: Maybe<String[] | String>;
+  myId_not_in?: Maybe<String[] | String>;
+  myId_lt?: Maybe<String>;
+  myId_lte?: Maybe<String>;
+  myId_gt?: Maybe<String>;
+  myId_gte?: Maybe<String>;
+  myId_contains?: Maybe<String>;
+  myId_not_contains?: Maybe<String>;
+  myId_starts_with?: Maybe<String>;
+  myId_not_starts_with?: Maybe<String>;
+  myId_ends_with?: Maybe<String>;
+  myId_not_ends_with?: Maybe<String>;
   AND?: Maybe<CowScalarWhereInput[] | CowScalarWhereInput>;
   OR?: Maybe<CowScalarWhereInput[] | CowScalarWhereInput>;
   NOT?: Maybe<CowScalarWhereInput[] | CowScalarWhereInput>;
@@ -1178,6 +1213,7 @@ export interface CowCreateWithoutHerdInput {
   device?: Maybe<String>;
   status: Boolean;
   localisation: String;
+  myId: String;
 }
 
 export interface CowCreateManyWithoutHerdInput {
@@ -1438,6 +1474,7 @@ export interface CowPreviousValues {
   localisation: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
+  myId: String;
 }
 
 export interface CowPreviousValuesPromise
@@ -1453,6 +1490,7 @@ export interface CowPreviousValuesPromise
   localisation: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+  myId: () => Promise<String>;
 }
 
 export interface CowPreviousValuesSubscription
@@ -1468,6 +1506,7 @@ export interface CowPreviousValuesSubscription
   localisation: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  myId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PageInfo {
@@ -1649,6 +1688,7 @@ export interface Cow {
   localisation: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
+  myId: String;
 }
 
 export interface CowPromise extends Promise<Cow>, Fragmentable {
@@ -1663,6 +1703,7 @@ export interface CowPromise extends Promise<Cow>, Fragmentable {
   localisation: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+  myId: () => Promise<String>;
 }
 
 export interface CowSubscription
@@ -1679,6 +1720,7 @@ export interface CowSubscription
   localisation: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  myId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface CowNullablePromise extends Promise<Cow | null>, Fragmentable {
@@ -1693,6 +1735,7 @@ export interface CowNullablePromise extends Promise<Cow | null>, Fragmentable {
   localisation: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+  myId: () => Promise<String>;
 }
 
 export interface CowSubscriptionPayload {

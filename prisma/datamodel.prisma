@@ -27,6 +27,7 @@ type Cow{
     localisation: String!
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
+    myId: String!
 }
 type Herd{
     id:ID! @id
