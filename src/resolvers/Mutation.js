@@ -92,7 +92,8 @@ const resetPassword = async (parent,args,context,info)=>{
        // to create a cow
 const cow = async (parent,args,context,info)=>{
     console.log("Create a cow mutation")
-    const images = await Promise.allSettled(args.images.map(async v=>await context.storeUpload(v)))
+    let images = await Promise.allSettled(args.images.map(async v=>await context.storeUpload(v)))
+    images = images.map(v=>v.path)
     const cow  = context.prisma.createCow({...args,status:true,images:{set:images},herd:{connect:{id:args.herd}},myId:Math.random.toString()})
     return cow
     }
