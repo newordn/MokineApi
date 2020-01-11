@@ -11,7 +11,7 @@ type Query{
 type Mutation{
     herd(herdsman:ID!,image:String!,location:String!,cows:[ID!]!,catterys:[ID!]!): Herd!
     cow(height:Float!,weight:Float!,heal:Int!,herd: ID!,images: [Upload!]!,device: String,localisation:String!): Cow!
-    resetPassword(newPassword:String!,id:ID!):User!
+    resetPassword(newPassword:String!,email:String!):User!
     sendingCode(id:ID!): String!
     updateUser(id:ID!,field:String!,value:String!): User!
     deleteUser(id:ID!): User!

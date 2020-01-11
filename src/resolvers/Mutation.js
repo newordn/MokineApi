@@ -57,6 +57,7 @@ const updateUser = async (parent,args,context,info)=>{
     })
     return updated
     }
+
 // to send a verification code
 const sendingCode = async (parent,args,context,info)=>{
     console.log("SendingCode mutation")
@@ -82,7 +83,7 @@ const resetPassword = async (parent,args,context,info)=>{
             password: newPassword
         },
         where:{
-            id:args.id
+            email:args.email
         }
     }) 
     return user
