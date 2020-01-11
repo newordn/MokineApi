@@ -6,6 +6,7 @@ const users = async (parent,args,context,info)=>{
 }
 // to list of the available herds
 const herds = async (parent,args,context,info)=>{
+    console.log("Herd query ")
     const herds = await context.prisma.herds({orderBy: 'id_DESC',where:{
         status:true}})
     return herds
