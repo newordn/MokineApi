@@ -25,10 +25,20 @@ console.log("Getting a user query")
 const user = await context.prisma.user({id:args.id})
     return user
 }
+
+  // to get users by their profession
+  const usersByProfession = async (parent,args,context,info)=>{
+    console.log("Getting users by profession")
+    const users = await context.prisma.users({orderBy:'id_DESC',where:{
+        profession:args.profession
+    }})
+    return users
+  }    
 module.exports={
     info,
     users,
     herds,
     cowsByHerd,
-    user
+    user,
+    usersByProfession
 }
