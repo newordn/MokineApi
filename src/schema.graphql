@@ -54,8 +54,8 @@ type Cow{
 }
 type Herd{
     id:ID!
-    image: String!
-    location:String!
+    image: String
+    location:String
     cows: [Cow!]!
     status: Boolean!
     catterys: [User!]!

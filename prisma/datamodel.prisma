@@ -31,8 +31,8 @@ type Cow{
 }
 type Herd{
     id:ID! @id
-    image: String,
-    location:String,
+    image: String
+    location:String
     cows: [Cow!]!
     status: Boolean!
     catterys: [User!]! @relation(name:"HerdUser")
