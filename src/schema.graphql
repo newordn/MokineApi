@@ -33,7 +33,7 @@ type User{
     localisation: String!
     nativeCountry:String!
     residentCountry:String!
-    others:String!
+    others:String
     status:Boolean!
     reset_password_token:String
     password:String!
