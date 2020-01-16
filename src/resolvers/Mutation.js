@@ -94,7 +94,8 @@ const cow = async (parent,args,context,info)=>{
     console.log("Create a cow mutation")
     let images = await Promise.all(args.images.map(async v=>await context.storeUpload(v)))
     images = images.map(v=>v.path)
-    const cow  = context.prisma.createCow({...args,status:true,images:{set:images},herd:{connect:{id:args.herd}},myId: new Date().getTime() })
+    const myId = new Date().getTime()
+    const cow  = await context.prisma.createCow({...args,status:true,images:{set:images},herd:{connect:{id:args.herd}},myId })
     return cow
     }
            // to create a herd
