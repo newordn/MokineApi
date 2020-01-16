@@ -6,7 +6,7 @@ type Query{
     users:[User!]!
     usersByProfession(profession:String!): [User!]!
     user(id:ID!):User!
-    herds:[Herd]!
+    herds:[Herd!]!
     cowsByHerd(herdId:ID!): [Cow!]!
     cowsWithoutHerd:[Cow!]!
 }
