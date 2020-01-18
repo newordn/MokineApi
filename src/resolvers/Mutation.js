@@ -10,6 +10,8 @@ const signUp = async (parent,args,context,info)=>{
     const password = await bcrypt.hash(args.password,10)
     const user = await context.prisma.createUser({...args,password,status:true})
     const token = jwt.sign({userId:user.id},APP_SECRET)
+    const code = await sendMail(user.email,`Bienvenue sur Mokine`,`Merci pour votre inscription. 
+    MokIne est une plateforme capable de suivre et de détecter des anomalies dans le comportement du bétail à tout moment et en tout lieu, dans le but d'isoler le plus tôt possible l'apparition de telles anomalies.`)    
     return {token,user}
 }
 
