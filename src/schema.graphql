@@ -3,12 +3,12 @@ const typeDefs = `
 scalar Upload
 type Query{
     info:String!
-    users:[User!]!
-    usersByProfession(profession:String!): [User!]!
-    user(id:ID!):User!
-    herds:[Herd!]!
-    cowsByHerd(herdId:ID!): [Cow!]!
-    cowsWithoutHerd:[Cow!]!
+    users:[User]
+    usersByProfession(profession:String!): [User]
+    user(id:ID!):User
+    herds:[Herd]
+    cowsByHerd(herdId:ID!): [Cow]
+    cowsWithoutHerd:[Cow]
 }
 type Mutation{
     herd(image:Upload!,location:String!,cows:[ID!]!,catterys:[ID!]!): Herd!
