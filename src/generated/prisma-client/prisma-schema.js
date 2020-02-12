@@ -28,7 +28,7 @@ type Cow {
   images: [String!]!
   device: String
   status: Boolean!
-  localisation: String!
+  location: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   myId: String!
@@ -53,7 +53,7 @@ input CowCreateInput {
   images: CowCreateimagesInput
   device: String
   status: Boolean!
-  localisation: String!
+  location: String!
   myId: String!
 }
 
@@ -70,7 +70,7 @@ input CowCreateWithoutHerdInput {
   images: CowCreateimagesInput
   device: String
   status: Boolean!
-  localisation: String!
+  location: String!
   myId: String!
 }
 
@@ -92,8 +92,8 @@ enum CowOrderByInput {
   device_DESC
   status_ASC
   status_DESC
-  localisation_ASC
-  localisation_DESC
+  location_ASC
+  location_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -110,7 +110,7 @@ type CowPreviousValues {
   images: [String!]!
   device: String
   status: Boolean!
-  localisation: String!
+  location: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   myId: String!
@@ -171,20 +171,20 @@ input CowScalarWhereInput {
   device_not_ends_with: String
   status: Boolean
   status_not: Boolean
-  localisation: String
-  localisation_not: String
-  localisation_in: [String!]
-  localisation_not_in: [String!]
-  localisation_lt: String
-  localisation_lte: String
-  localisation_gt: String
-  localisation_gte: String
-  localisation_contains: String
-  localisation_not_contains: String
-  localisation_starts_with: String
-  localisation_not_starts_with: String
-  localisation_ends_with: String
-  localisation_not_ends_with: String
+  location: String
+  location_not: String
+  location_in: [String!]
+  location_not_in: [String!]
+  location_lt: String
+  location_lte: String
+  location_gt: String
+  location_gte: String
+  location_contains: String
+  location_not_contains: String
+  location_starts_with: String
+  location_not_starts_with: String
+  location_ends_with: String
+  location_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -250,7 +250,7 @@ input CowUpdateInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
-  localisation: String
+  location: String
   myId: String
 }
 
@@ -261,7 +261,7 @@ input CowUpdateManyDataInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
-  localisation: String
+  location: String
   myId: String
 }
 
@@ -272,7 +272,7 @@ input CowUpdateManyMutationInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
-  localisation: String
+  location: String
   myId: String
 }
 
@@ -300,7 +300,7 @@ input CowUpdateWithoutHerdDataInput {
   images: CowUpdateimagesInput
   device: String
   status: Boolean
-  localisation: String
+  location: String
   myId: String
 }
 
@@ -371,20 +371,20 @@ input CowWhereInput {
   device_not_ends_with: String
   status: Boolean
   status_not: Boolean
-  localisation: String
-  localisation_not: String
-  localisation_in: [String!]
-  localisation_not_in: [String!]
-  localisation_lt: String
-  localisation_lte: String
-  localisation_gt: String
-  localisation_gte: String
-  localisation_contains: String
-  localisation_not_contains: String
-  localisation_starts_with: String
-  localisation_not_starts_with: String
-  localisation_ends_with: String
-  localisation_not_ends_with: String
+  location: String
+  location_not: String
+  location_in: [String!]
+  location_not_in: [String!]
+  location_lt: String
+  location_lte: String
+  location_gt: String
+  location_gte: String
+  location_contains: String
+  location_not_contains: String
+  location_starts_with: String
+  location_not_starts_with: String
+  location_ends_with: String
+  location_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
