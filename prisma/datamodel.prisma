@@ -28,6 +28,7 @@ type Cow{
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
     myId: String!
+    positions: [Position] @relation(name:"CowPosition")
 }
 type Herd{
     id:ID! @id
@@ -36,6 +37,21 @@ type Herd{
     cows: [Cow!]!
     status: Boolean!
     catterys: [User!]! @relation(name:"HerdUser")
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+type Position{
+    id: ID! @id
+    moduleId: String!
+    timestamp: Int!
+    lat: String!
+    lon: String!
+    altitude: String!
+    batt: Int!
+    speed: Int!
+    temperature: Int!
+    satelites: Int!
+    cowAt: Cow! @relation(name:"CowPosition")
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }

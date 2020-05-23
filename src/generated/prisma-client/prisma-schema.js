@@ -11,6 +11,10 @@ type AggregateHerd {
   count: Int!
 }
 
+type AggregatePosition {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -32,6 +36,7 @@ type Cow {
   createdAt: DateTime!
   updatedAt: DateTime!
   myId: String!
+  positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position!]
 }
 
 type CowConnection {
@@ -55,6 +60,7 @@ input CowCreateInput {
   status: Boolean!
   location: String!
   myId: String!
+  positions: PositionCreateManyWithoutCowAtInput
 }
 
 input CowCreateManyWithoutHerdInput {
@@ -62,11 +68,30 @@ input CowCreateManyWithoutHerdInput {
   connect: [CowWhereUniqueInput!]
 }
 
+input CowCreateOneWithoutPositionsInput {
+  create: CowCreateWithoutPositionsInput
+  connect: CowWhereUniqueInput
+}
+
 input CowCreateWithoutHerdInput {
   id: ID
   height: Float!
   weight: Float!
   heal: Int!
+  images: CowCreateimagesInput
+  device: String
+  status: Boolean!
+  location: String!
+  myId: String!
+  positions: PositionCreateManyWithoutCowAtInput
+}
+
+input CowCreateWithoutPositionsInput {
+  id: ID
+  height: Float!
+  weight: Float!
+  heal: Int!
+  herd: HerdCreateOneWithoutCowsInput
   images: CowCreateimagesInput
   device: String
   status: Boolean!
@@ -252,6 +277,7 @@ input CowUpdateInput {
   status: Boolean
   location: String
   myId: String
+  positions: PositionUpdateManyWithoutCowAtInput
 }
 
 input CowUpdateManyDataInput {
@@ -293,10 +319,30 @@ input CowUpdateManyWithWhereNestedInput {
   data: CowUpdateManyDataInput!
 }
 
+input CowUpdateOneRequiredWithoutPositionsInput {
+  create: CowCreateWithoutPositionsInput
+  update: CowUpdateWithoutPositionsDataInput
+  upsert: CowUpsertWithoutPositionsInput
+  connect: CowWhereUniqueInput
+}
+
 input CowUpdateWithoutHerdDataInput {
   height: Float
   weight: Float
   heal: Int
+  images: CowUpdateimagesInput
+  device: String
+  status: Boolean
+  location: String
+  myId: String
+  positions: PositionUpdateManyWithoutCowAtInput
+}
+
+input CowUpdateWithoutPositionsDataInput {
+  height: Float
+  weight: Float
+  heal: Int
+  herd: HerdUpdateOneWithoutCowsInput
   images: CowUpdateimagesInput
   device: String
   status: Boolean
@@ -307,6 +353,11 @@ input CowUpdateWithoutHerdDataInput {
 input CowUpdateWithWhereUniqueWithoutHerdInput {
   where: CowWhereUniqueInput!
   data: CowUpdateWithoutHerdDataInput!
+}
+
+input CowUpsertWithoutPositionsInput {
+  update: CowUpdateWithoutPositionsDataInput!
+  create: CowCreateWithoutPositionsInput!
 }
 
 input CowUpsertWithWhereUniqueWithoutHerdInput {
@@ -415,6 +466,9 @@ input CowWhereInput {
   myId_not_starts_with: String
   myId_ends_with: String
   myId_not_ends_with: String
+  positions_every: PositionWhereInput
+  positions_some: PositionWhereInput
+  positions_none: PositionWhereInput
   AND: [CowWhereInput!]
   OR: [CowWhereInput!]
   NOT: [CowWhereInput!]
@@ -673,6 +727,12 @@ type Mutation {
   upsertHerd(where: HerdWhereUniqueInput!, create: HerdCreateInput!, update: HerdUpdateInput!): Herd!
   deleteHerd(where: HerdWhereUniqueInput!): Herd
   deleteManyHerds(where: HerdWhereInput): BatchPayload!
+  createPosition(data: PositionCreateInput!): Position!
+  updatePosition(data: PositionUpdateInput!, where: PositionWhereUniqueInput!): Position
+  updateManyPositions(data: PositionUpdateManyMutationInput!, where: PositionWhereInput): BatchPayload!
+  upsertPosition(where: PositionWhereUniqueInput!, create: PositionCreateInput!, update: PositionUpdateInput!): Position!
+  deletePosition(where: PositionWhereUniqueInput!): Position
+  deleteManyPositions(where: PositionWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -698,6 +758,471 @@ type PageInfo {
   endCursor: String
 }
 
+type Position {
+  id: ID!
+  moduleId: String!
+  timestamp: Int!
+  lat: String!
+  lon: String!
+  altitude: String!
+  batt: Int!
+  speed: Int!
+  temperature: Int!
+  satelites: Int!
+  cowAt: Cow!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PositionConnection {
+  pageInfo: PageInfo!
+  edges: [PositionEdge]!
+  aggregate: AggregatePosition!
+}
+
+input PositionCreateInput {
+  id: ID
+  moduleId: String!
+  timestamp: Int!
+  lat: String!
+  lon: String!
+  altitude: String!
+  batt: Int!
+  speed: Int!
+  temperature: Int!
+  satelites: Int!
+  cowAt: CowCreateOneWithoutPositionsInput!
+}
+
+input PositionCreateManyWithoutCowAtInput {
+  create: [PositionCreateWithoutCowAtInput!]
+  connect: [PositionWhereUniqueInput!]
+}
+
+input PositionCreateWithoutCowAtInput {
+  id: ID
+  moduleId: String!
+  timestamp: Int!
+  lat: String!
+  lon: String!
+  altitude: String!
+  batt: Int!
+  speed: Int!
+  temperature: Int!
+  satelites: Int!
+}
+
+type PositionEdge {
+  node: Position!
+  cursor: String!
+}
+
+enum PositionOrderByInput {
+  id_ASC
+  id_DESC
+  moduleId_ASC
+  moduleId_DESC
+  timestamp_ASC
+  timestamp_DESC
+  lat_ASC
+  lat_DESC
+  lon_ASC
+  lon_DESC
+  altitude_ASC
+  altitude_DESC
+  batt_ASC
+  batt_DESC
+  speed_ASC
+  speed_DESC
+  temperature_ASC
+  temperature_DESC
+  satelites_ASC
+  satelites_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type PositionPreviousValues {
+  id: ID!
+  moduleId: String!
+  timestamp: Int!
+  lat: String!
+  lon: String!
+  altitude: String!
+  batt: Int!
+  speed: Int!
+  temperature: Int!
+  satelites: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input PositionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  moduleId: String
+  moduleId_not: String
+  moduleId_in: [String!]
+  moduleId_not_in: [String!]
+  moduleId_lt: String
+  moduleId_lte: String
+  moduleId_gt: String
+  moduleId_gte: String
+  moduleId_contains: String
+  moduleId_not_contains: String
+  moduleId_starts_with: String
+  moduleId_not_starts_with: String
+  moduleId_ends_with: String
+  moduleId_not_ends_with: String
+  timestamp: Int
+  timestamp_not: Int
+  timestamp_in: [Int!]
+  timestamp_not_in: [Int!]
+  timestamp_lt: Int
+  timestamp_lte: Int
+  timestamp_gt: Int
+  timestamp_gte: Int
+  lat: String
+  lat_not: String
+  lat_in: [String!]
+  lat_not_in: [String!]
+  lat_lt: String
+  lat_lte: String
+  lat_gt: String
+  lat_gte: String
+  lat_contains: String
+  lat_not_contains: String
+  lat_starts_with: String
+  lat_not_starts_with: String
+  lat_ends_with: String
+  lat_not_ends_with: String
+  lon: String
+  lon_not: String
+  lon_in: [String!]
+  lon_not_in: [String!]
+  lon_lt: String
+  lon_lte: String
+  lon_gt: String
+  lon_gte: String
+  lon_contains: String
+  lon_not_contains: String
+  lon_starts_with: String
+  lon_not_starts_with: String
+  lon_ends_with: String
+  lon_not_ends_with: String
+  altitude: String
+  altitude_not: String
+  altitude_in: [String!]
+  altitude_not_in: [String!]
+  altitude_lt: String
+  altitude_lte: String
+  altitude_gt: String
+  altitude_gte: String
+  altitude_contains: String
+  altitude_not_contains: String
+  altitude_starts_with: String
+  altitude_not_starts_with: String
+  altitude_ends_with: String
+  altitude_not_ends_with: String
+  batt: Int
+  batt_not: Int
+  batt_in: [Int!]
+  batt_not_in: [Int!]
+  batt_lt: Int
+  batt_lte: Int
+  batt_gt: Int
+  batt_gte: Int
+  speed: Int
+  speed_not: Int
+  speed_in: [Int!]
+  speed_not_in: [Int!]
+  speed_lt: Int
+  speed_lte: Int
+  speed_gt: Int
+  speed_gte: Int
+  temperature: Int
+  temperature_not: Int
+  temperature_in: [Int!]
+  temperature_not_in: [Int!]
+  temperature_lt: Int
+  temperature_lte: Int
+  temperature_gt: Int
+  temperature_gte: Int
+  satelites: Int
+  satelites_not: Int
+  satelites_in: [Int!]
+  satelites_not_in: [Int!]
+  satelites_lt: Int
+  satelites_lte: Int
+  satelites_gt: Int
+  satelites_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [PositionScalarWhereInput!]
+  OR: [PositionScalarWhereInput!]
+  NOT: [PositionScalarWhereInput!]
+}
+
+type PositionSubscriptionPayload {
+  mutation: MutationType!
+  node: Position
+  updatedFields: [String!]
+  previousValues: PositionPreviousValues
+}
+
+input PositionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PositionWhereInput
+  AND: [PositionSubscriptionWhereInput!]
+  OR: [PositionSubscriptionWhereInput!]
+  NOT: [PositionSubscriptionWhereInput!]
+}
+
+input PositionUpdateInput {
+  moduleId: String
+  timestamp: Int
+  lat: String
+  lon: String
+  altitude: String
+  batt: Int
+  speed: Int
+  temperature: Int
+  satelites: Int
+  cowAt: CowUpdateOneRequiredWithoutPositionsInput
+}
+
+input PositionUpdateManyDataInput {
+  moduleId: String
+  timestamp: Int
+  lat: String
+  lon: String
+  altitude: String
+  batt: Int
+  speed: Int
+  temperature: Int
+  satelites: Int
+}
+
+input PositionUpdateManyMutationInput {
+  moduleId: String
+  timestamp: Int
+  lat: String
+  lon: String
+  altitude: String
+  batt: Int
+  speed: Int
+  temperature: Int
+  satelites: Int
+}
+
+input PositionUpdateManyWithoutCowAtInput {
+  create: [PositionCreateWithoutCowAtInput!]
+  delete: [PositionWhereUniqueInput!]
+  connect: [PositionWhereUniqueInput!]
+  set: [PositionWhereUniqueInput!]
+  disconnect: [PositionWhereUniqueInput!]
+  update: [PositionUpdateWithWhereUniqueWithoutCowAtInput!]
+  upsert: [PositionUpsertWithWhereUniqueWithoutCowAtInput!]
+  deleteMany: [PositionScalarWhereInput!]
+  updateMany: [PositionUpdateManyWithWhereNestedInput!]
+}
+
+input PositionUpdateManyWithWhereNestedInput {
+  where: PositionScalarWhereInput!
+  data: PositionUpdateManyDataInput!
+}
+
+input PositionUpdateWithoutCowAtDataInput {
+  moduleId: String
+  timestamp: Int
+  lat: String
+  lon: String
+  altitude: String
+  batt: Int
+  speed: Int
+  temperature: Int
+  satelites: Int
+}
+
+input PositionUpdateWithWhereUniqueWithoutCowAtInput {
+  where: PositionWhereUniqueInput!
+  data: PositionUpdateWithoutCowAtDataInput!
+}
+
+input PositionUpsertWithWhereUniqueWithoutCowAtInput {
+  where: PositionWhereUniqueInput!
+  update: PositionUpdateWithoutCowAtDataInput!
+  create: PositionCreateWithoutCowAtInput!
+}
+
+input PositionWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  moduleId: String
+  moduleId_not: String
+  moduleId_in: [String!]
+  moduleId_not_in: [String!]
+  moduleId_lt: String
+  moduleId_lte: String
+  moduleId_gt: String
+  moduleId_gte: String
+  moduleId_contains: String
+  moduleId_not_contains: String
+  moduleId_starts_with: String
+  moduleId_not_starts_with: String
+  moduleId_ends_with: String
+  moduleId_not_ends_with: String
+  timestamp: Int
+  timestamp_not: Int
+  timestamp_in: [Int!]
+  timestamp_not_in: [Int!]
+  timestamp_lt: Int
+  timestamp_lte: Int
+  timestamp_gt: Int
+  timestamp_gte: Int
+  lat: String
+  lat_not: String
+  lat_in: [String!]
+  lat_not_in: [String!]
+  lat_lt: String
+  lat_lte: String
+  lat_gt: String
+  lat_gte: String
+  lat_contains: String
+  lat_not_contains: String
+  lat_starts_with: String
+  lat_not_starts_with: String
+  lat_ends_with: String
+  lat_not_ends_with: String
+  lon: String
+  lon_not: String
+  lon_in: [String!]
+  lon_not_in: [String!]
+  lon_lt: String
+  lon_lte: String
+  lon_gt: String
+  lon_gte: String
+  lon_contains: String
+  lon_not_contains: String
+  lon_starts_with: String
+  lon_not_starts_with: String
+  lon_ends_with: String
+  lon_not_ends_with: String
+  altitude: String
+  altitude_not: String
+  altitude_in: [String!]
+  altitude_not_in: [String!]
+  altitude_lt: String
+  altitude_lte: String
+  altitude_gt: String
+  altitude_gte: String
+  altitude_contains: String
+  altitude_not_contains: String
+  altitude_starts_with: String
+  altitude_not_starts_with: String
+  altitude_ends_with: String
+  altitude_not_ends_with: String
+  batt: Int
+  batt_not: Int
+  batt_in: [Int!]
+  batt_not_in: [Int!]
+  batt_lt: Int
+  batt_lte: Int
+  batt_gt: Int
+  batt_gte: Int
+  speed: Int
+  speed_not: Int
+  speed_in: [Int!]
+  speed_not_in: [Int!]
+  speed_lt: Int
+  speed_lte: Int
+  speed_gt: Int
+  speed_gte: Int
+  temperature: Int
+  temperature_not: Int
+  temperature_in: [Int!]
+  temperature_not_in: [Int!]
+  temperature_lt: Int
+  temperature_lte: Int
+  temperature_gt: Int
+  temperature_gte: Int
+  satelites: Int
+  satelites_not: Int
+  satelites_in: [Int!]
+  satelites_not_in: [Int!]
+  satelites_lt: Int
+  satelites_lte: Int
+  satelites_gt: Int
+  satelites_gte: Int
+  cowAt: CowWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [PositionWhereInput!]
+  OR: [PositionWhereInput!]
+  NOT: [PositionWhereInput!]
+}
+
+input PositionWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   cow(where: CowWhereUniqueInput!): Cow
   cows(where: CowWhereInput, orderBy: CowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cow]!
@@ -705,6 +1230,9 @@ type Query {
   herd(where: HerdWhereUniqueInput!): Herd
   herds(where: HerdWhereInput, orderBy: HerdOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Herd]!
   herdsConnection(where: HerdWhereInput, orderBy: HerdOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HerdConnection!
+  position(where: PositionWhereUniqueInput!): Position
+  positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position]!
+  positionsConnection(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PositionConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -714,6 +1242,7 @@ type Query {
 type Subscription {
   cow(where: CowSubscriptionWhereInput): CowSubscriptionPayload
   herd(where: HerdSubscriptionWhereInput): HerdSubscriptionPayload
+  position(where: PositionSubscriptionWhereInput): PositionSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
