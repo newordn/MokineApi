@@ -9,6 +9,7 @@ type Query{
     herds:[Herd]
     cowsByHerd(herdId:ID!): [Cow]
     cowsWithoutHerd:[Cow]
+    positionsByCow(cowId:ID!):[Position]
 }
 type Mutation{
     herd(image:Upload!,location:String!,cows:[ID!]!,catterys:[ID!]!): Herd!
@@ -17,6 +18,7 @@ type Mutation{
     sendingCode(id:ID!): String!
     updateUser(id:ID!,field:String!,value:String!): User!
     deleteUser(id:ID!): User!
+    position(moduleId: String!,timestamp: Int!,lat: String!,lon: String!,altitude: String!,batt: Int!,speed: Int!,temperature: Int!,satelites: Int!,cowAt: ID!): Position
     signIn(phone:String,password:String!):AuthPayload!
     signUp(name:String!,email:String!,phone:String!,profession:String!,localisation:String!,nativeCountry:String!,residentCountry:String!,others:String!,password:String!):AuthPayload!
 }

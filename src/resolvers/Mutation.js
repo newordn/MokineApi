@@ -116,6 +116,12 @@ const herd = async (parent,args,context,info)=>{
 })
     return herd
     }
+
+    const position= async (parent,args,context,info)=>{
+        console.log("Save a position mutation")
+        const position = await context.prisma.createPosition({...args,cowAt:{connect:{device:args.cowAt}}})
+        return position
+        }
      
 module.exports={
     signUp,
@@ -125,5 +131,6 @@ module.exports={
     sendingCode,
     resetPassword,
     cow,
-    herd
+    herd,
+    position
 }

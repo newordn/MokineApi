@@ -50,7 +50,12 @@ const user = await context.prisma.user({id:args.id})
         herd:null
     }})
     return cows
-}  
+} 
+const positionsByCow =  async (parent,args,context,info)=>{
+    console.log("postiions of a cow query ")
+    const positions = await context.prisma.cow({id:args.cowId}).positions({orderBy:'id_DESC'})
+    return positions
+} 
 module.exports={
     info,
     users,
@@ -58,5 +63,6 @@ module.exports={
     cowsByHerd,
     user,
     usersByProfession,
-    cowsWithoutHerd
+    cowsWithoutHerd,
+    positionsByCow
 }
